@@ -1,5 +1,4 @@
 # Linked List Assignment
 ####Jesse Klein & Muoi Ly
 
-
-Access linked_list.py for the class LinkedList and create linked lists to hold data.
+Use LinkedList class from link_list.py to implement the Stack class and the methods, push(value) and pop()
