@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+"""Test file for 'stack.py'
+
+Run this file with pytest to test conditions
+"""
 from __future__ import unicode_literals
 import pytest
 import stack
@@ -10,36 +14,43 @@ foo = stack.Stack(value)
 
 # init
 
-# check instance is type 'stack'
 def test_init_type():
-    assert type(foo) == 'stack'
+    """Check instance is type 'stack'"""
+    assert type(foo) == stack.Stack
 
-# check 'push' and 'pop' in dir(foo)
+
 def test_init_push():
+    """Check 'push' in dir(foo)"""
     assert 'push' in dir(foo)
 
 
 def test_init_pop():
+    """Check 'pop' in dir(foo)"""
     assert 'pop' in dir(foo)
 
-# check 'insert', 'size', 'search', 'remove', 'display' are not in dir(foo)
+
 def test_init_insert():
+    """Check 'insert' is not in dir(foo)"""
     assert 'insert' not in dir(foo)
 
 
 def test_init_size():
+    """Check 'size' is not in dir(foo)"""
     assert 'size' not in dir(foo)
 
 
 def test_init_search():
+    """Check 'search' is not in dir(foo)"""
     assert 'search' not in dir(foo)
 
 
 def test_init_remove():
+    """Check 'remove' is not in dir(foo)"""
     assert 'remove' not in dir(foo)
 
 
 def test_init_display():
+    """Check 'display' is not in dir(foo)"""
     assert 'display' not in dir(foo)
 
 
@@ -47,23 +58,26 @@ def test_init_display():
 
 bar = foo.pop()
 
-# check bar = 5
+
 def test_pop_value():
+    """Check bar = 5"""
     assert bar == 5
 
 
 empty = stack.Stack([])
 
-# assert empty.pop() raises Exception
+
 def test_pop_empty():
-    with pytest.raises(Exception):
+    """Assert empty.pop() raises Exception"""
+    with pytest.raises(AttributeError):
         nothing = empty.pop()
 
 
 # push
 
-foo.push(5)
+foo.push(bar)
 
-# check foo = stack.Stack(value)
+
 def test_push_restore():
-    assert foo == stack.Stack(value)
+    """Check foo.pop() = 5"""
+    assert foo.pop() == 5

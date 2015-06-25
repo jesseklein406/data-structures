@@ -13,4 +13,9 @@ class Stack(object):
         self._linkedList.insert(value)
 
     def pop(self):
-        return self._linkedList.pop()
+        try:
+            return self._linkedList.pop()
+        except AttributeError:
+            print "message"
+            raise
+        
