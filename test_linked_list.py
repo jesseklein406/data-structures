@@ -95,3 +95,17 @@ def test_remove_size():
 
 def test_display():
     assert d.display() == (5,)    # test to make sure they are equivalent
+
+
+# pop method
+
+e = copy.copy(d)
+f = e.pop()
+
+
+def test_pop_size():
+    assert e.size() is 0
+
+
+def test_pop_return():
+    assert f is 5
