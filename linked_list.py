@@ -7,16 +7,19 @@ class Node(object):
 
 class LinkedList(object):
     
-    def __init__(self):
+    def __init__(self, iterable=None):
         self.sizeOfList = 0
         self.head = None
+
+        if iterable != None:
+            for item in iterable:
+                self.insert(item)
 
     def insert(self, val):
         new_node = Node(val)
         new_node.next_node = self.head
         self.head = new_node
         self.sizeOfList += 1
-        print "head is now", self.head.value
 
     def pop(self):
         val = self.head.value
@@ -46,7 +49,7 @@ class LinkedList(object):
             while current != None and not (current is node):
                 previous = current
                 current = current.next_node
-                
+
             if current is node:
                 previous.next_node = current.next_node
                 self.sizeOfList -=1
@@ -59,4 +62,3 @@ class LinkedList(object):
             result += (current.value,) 
             current = current.next_node
         return result    
-
