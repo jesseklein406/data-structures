@@ -11,7 +11,8 @@ import queue
 
 @pytest.fixture(scope="function")
 def create_queue(request):
-    """Create a queue with numbers 1 - 5"""
+    """Create a queue with numbers 1 - 5
+    """
     new_queue = queue.Queue()
     for i in range(1, 6):
         new_queue.enqueue(i)
@@ -19,7 +20,9 @@ def create_queue(request):
 
 
 def test_dequeue(create_queue):
-    first_queue = create_queue()
+    """Test that the queue shrinks and returns first in
+    """
+    first_queue = create_queue
     first_val = first_queue.dequeue()
     assert first_val is 1
     assert first_queue.size() is 4
@@ -29,7 +32,9 @@ def test_dequeue(create_queue):
 
 
 def test_enqueue(create_queue):
-    second_queue = create_queue()
+    """Test that the queue grows and returns first in
+    """
+    second_queue = create_queue
     second_queue.enqueue(6)
     assert second_queue.size() is 6
     foo = second_queue.dequeue()
@@ -38,7 +43,9 @@ def test_enqueue(create_queue):
 
 
 def test_empty(create_queue):
+    """Test that empty queue size method returns 0 and dequeue raises IndexError
+    """
     empty = queue.Queue()
     assert empty.size() is 0
-    with pytest.raises("ValueError"):
-        empty.dequeue
+    with pytest.raises(IndexError):
+        empty.dequeue()
