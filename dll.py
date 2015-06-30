@@ -77,7 +77,12 @@ class Dll(object):
                 current = current.next_node
 
             if current.val == val:
-                current.next_node.prev_node
+                if current is self.head:
+                    head = self.head.next_node
+                    head.prev_node = None
+                else:
+                    current.prev_node.next_node = current.next_node
+                    current.next_node.prev_node = current.prev_node
             else:
                 raise ValueError
             self.sizeOfList -= 1
