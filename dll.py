@@ -6,7 +6,7 @@ class Node(object):
         self.prev_node = None
 
 
-class LinkedList(object):
+class Dll(object):
 
     def __init__(self, iterable=None):
         self.sizeOfList = 0
@@ -38,24 +38,27 @@ class LinkedList(object):
             self.tail.next_node = new_node
             new_node.prev_node = self.tail
             self.tail = new_node
+
         self.sizeOfList += 1
 
     def pop(self):
-        val = self.head.val
         if self.head is None:
             raise IndexError
         else:
-            self.head = self.head.next_node
+            val = self.head.val
             self.head.previous = None
+            self.head = self.head.next_node
         self.sizeOfList -= 1
         return val
 
     def shift(self):
+        if self.tail is None:
+            raise IndexError
         val = self.tail.val
         if self.tail.prev_node is None:
             self.head = self.tail = None
         else:
-            self.tail = self.tail.previous
+            self.tail = self.tail.prev_node
             self.tail.next_node = None
 
         self.sizeOfList -= 1
