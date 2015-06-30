@@ -1,5 +1,6 @@
-# Linked List Assignment
+# Queue Data Structures Assignment
 ####Jesse Klein & Muoi Ly
 
 
-Access linked_list.py for the class LinkedList and create linked lists to hold data.
+Access 'queue.py' for the class Queue and create a queue to hold data.
+The test file for the module is 'test_queue.py'.
