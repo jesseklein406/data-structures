@@ -38,19 +38,25 @@ class Dll(object):
             self.tail.next_node = new_node
             new_node.prev_node = self.tail
             self.tail = new_node
+
         self.sizeOfList += 1
 
     def pop(self):
-        val = self.head.val
         if self.head is None:
             raise IndexError
+        elif self.head is self.tail:
+            val = self.head.val
+            self.head = self.tail = None
         else:
+            val = self.head.val
             self.head = self.head.next_node
             self.head.previous = None
         self.sizeOfList -= 1
         return val
 
     def shift(self):
+        if self.tail is None:
+            raise IndexError
         val = self.tail.val
         if self.tail.prev_node is None:
             self.head = self.tail = None
@@ -83,3 +89,4 @@ class Dll(object):
             result += (current.val,)
             current = current.next_node
         return result
+
