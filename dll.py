@@ -6,7 +6,7 @@ class Node(object):
         self.prev_node = None
 
 
-class LinkedList(object):
+class Dll(object):
 
     def __init__(self, iterable=None):
         self.sizeOfList = 0
@@ -55,7 +55,7 @@ class LinkedList(object):
         if self.tail.prev_node is None:
             self.head = self.tail = None
         else:
-            self.tail = self.tail.previous
+            self.tail = self.tail.prev_node
             self.tail.next_node = None
 
         self.sizeOfList -= 1
