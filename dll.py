@@ -44,10 +44,14 @@ class Dll(object):
     def pop(self):
         if self.head is None:
             raise IndexError
+        elif self.head is self.tail:
+            val = self.head.val
+            self.head = self.tail = None
         else:
             val = self.head.val
-            self.head.previous = None
             self.head = self.head.next_node
+            self.head.previous = None
+            print "Head is Tail, ", self.head is self.tail
         self.sizeOfList -= 1
         return val
 
