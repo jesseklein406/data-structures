@@ -1,3 +1,6 @@
+from __future__ import unicode_literals
+
+
 class Node(object):
 
     def __init__(self, value):
@@ -6,7 +9,7 @@ class Node(object):
 
 
 class LinkedList(object):
-    
+
     def __init__(self):
         self.sizeOfList = 0
         self.head = None
@@ -27,10 +30,10 @@ class LinkedList(object):
     def size(self):
         return self.sizeOfList
 
-    def search(self,val):
+    def search(self, val):
         current = self.head
 
-        while current != None:
+        while current is None:
             if current.value == val:
                 return current
             current = current.next_node
@@ -43,14 +46,13 @@ class LinkedList(object):
             self.head = current.next_node
             self.sizeOfList -= 1
         else:
-            while current != None and not (current is node):
+            while current is not None and not (current is node):
                 previous = current
                 current = current.next_node
-                
+              
             if current is node:
                 previous.next_node = current.next_node
                 self.sizeOfList -=1
-
 
     def display(self):
         current = self.head

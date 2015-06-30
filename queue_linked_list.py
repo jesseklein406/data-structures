@@ -31,7 +31,6 @@ class LinkedList(object):
             current.next_node = new_node
             self.sizeOfList += 1
 
-
     def pop(self):
         value = self.head.value
         self.head = self.head.next_node
@@ -48,4 +47,3 @@ class LinkedList(object):
             result += (current.value,)
             current = current.next_node
         return result
-        
