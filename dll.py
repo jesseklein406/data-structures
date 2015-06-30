@@ -51,7 +51,6 @@ class Dll(object):
             val = self.head.val
             self.head = self.head.next_node
             self.head.previous = None
-            print "Head is Tail, ", self.head is self.tail
         self.sizeOfList -= 1
         return val
 
@@ -90,3 +89,4 @@ class Dll(object):
             result += (current.val,)
             current = current.next_node
         return result
+
