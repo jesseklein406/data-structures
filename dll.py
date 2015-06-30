@@ -68,15 +68,19 @@ class Dll(object):
         return val
 
     def remove(self, val):
-        current = self.head
-        while current is not self.tail and current.val != val:
-            current = current.next_node
 
-        if current.val == val:
-            current.next_node.prev_node
-        else:
+        if self.head is None:
             raise ValueError
-        self.sizeOfList -= 1
+        else:   
+            current = self.head
+            while current is not self.tail and current.val != val:
+                current = current.next_node
+
+            if current.val == val:
+                current.next_node.prev_node
+            else:
+                raise ValueError
+            self.sizeOfList -= 1
         return current
 
     def size(self):
@@ -90,3 +94,4 @@ class Dll(object):
             current = current.next_node
         return result
 
+        
