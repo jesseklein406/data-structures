@@ -50,7 +50,7 @@ class Dll(object):
         else:
             val = self.head.val
             self.head = self.head.next_node
-            self.head.previous = None
+            self.head.prev_node = None
         self.sizeOfList -= 1
         return val
 
@@ -71,7 +71,7 @@ class Dll(object):
 
         if self.head is None:
             raise ValueError
-        else:   
+        else:
             current = self.head
             while current is not self.tail and current.val != val:
                 current = current.next_node
@@ -93,5 +93,3 @@ class Dll(object):
             result += (current.val,)
             current = current.next_node
         return result
-
-        
