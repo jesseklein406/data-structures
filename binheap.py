@@ -5,10 +5,19 @@ from __future__ import unicode_literals
 
 class BinHeap(object):
 
-    def __init__(self):
+    def __init__(self, iterable=None):
         # heap will start at index 1 of heapList.
         self.heapList = [0]
         self._size = 0
+
+        # builds a heap from an iterable
+        if iterable is not None:
+            index = len(iterable) // 2
+            self._size = len(iterable)
+            self.heapList = self.heapList + list(iterable[:])
+            while index > 0:
+                self.pop_helper(index)
+                index = index - 1
 
     def push_helper(self, index):
         while index // 2 > 0:
@@ -42,7 +51,8 @@ class BinHeap(object):
             if rightChildIndex > self._size:
                 smallestChild = leftChildIndex
             else:
-                if self.heapList[leftChildIndex] < self.heapList[rightChildIndex]:
+                if (self.heapList[leftChildIndex] <
+                        self.heapList[rightChildIndex]):
                     smallestChild = leftChildIndex
                 else:
                     smallestChild = rightChildIndex
