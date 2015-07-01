@@ -16,7 +16,7 @@ class BinHeap(object):
                 self.heapList[index] = temp
             index = index // 2
 
-    def insert(self, val):
+    def push(self, val):
         self.heapList.append(val)
         self._size += 1
         self.insert_helper(self._size)
