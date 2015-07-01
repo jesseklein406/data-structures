@@ -62,4 +62,3 @@ class LinkedList(object):
             result += (current.value,) 
             current = current.next_node
         return result    
-
