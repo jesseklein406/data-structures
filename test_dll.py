@@ -224,6 +224,21 @@ def test_remove_tail_prev(create_mirrored_dll):
     assert create_mirrored_dll.tail.prev_node.val is 4
 
 
+def test_remove_middle_val(create_mirrored_dll):
+    create_mirrored_dll.remove(4)
+    assert create_mirrored_dll.head.val is 5
+
+
+def test_remove_middle_next(create_mirrored_dll):
+    create_mirrored_dll.remove(4)
+    assert create_mirrored_dll.head.next_node.val is 3
+
+
+def test_remove_middle_prev(create_mirrored_dll):
+    create_mirrored_dll.remove(4)
+    assert create_mirrored_dll.head.prev_node is None
+
+
 def test_remove_empty(create_empty):
     with pytest.raises(ValueError):
         create_empty.remove(5)
