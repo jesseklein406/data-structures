@@ -78,8 +78,8 @@ class Dll(object):
 
             if current.val == val:
                 if current is self.head:
-                    head = self.head.next_node
-                    head.prev_node = None
+                    self.head = self.head.next_node
+                    self.head.prev_node = None
                 else:
                     current.prev_node.next_node = current.next_node
                     current.next_node.prev_node = current.prev_node
