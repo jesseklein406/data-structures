@@ -32,7 +32,8 @@ def build_empty_q():
 
 
 def test_built_list(build_priorityq):
-    assert build_priorityq.pqheap.heapList == [0, 1, 3, 2, 5]
+    sliced_list = [i.priority for i in build_priorityq.pqheap.heapList[1:]]
+    assert sliced_list == [1, 3, 2, 5]
 
 
 def test_built_peek(build_priorityq):
@@ -55,4 +56,5 @@ def test_next_popped(build_priorityq):
 
 
 def test_new_list(build_priorityq):
-    assert build_priorityq.pqheap.heapList == [0, 2, 3, 5]
+    sliced_list = [i.priority for i in build_priorityq.pqheap.heapList[1:]]
+    assert sliced_list == [2, 3, 5]
