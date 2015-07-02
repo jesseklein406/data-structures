@@ -28,8 +28,7 @@ class PriorityQ(object):
         return self.pqheap.pop()
 
     def peek(self):
-        pass
-
+        return self.pqheap.peek()
 
 class BinHeap(object):
 
@@ -71,6 +70,10 @@ class BinHeap(object):
 
         return value
 
+    def peek(self):
+        val = self.heapList[1]
+        return val
+
     def pop_helper(self, index):
         leftChildIndex = 2 * index
         rightChildIndex = 2 * index + 1
@@ -105,9 +108,30 @@ for i in range(9):
 
 l = pq.pqheap.heapList
 
-for item in l:
-    if type(item) is not int:
-        print "priority:", item.priority, " ",
+def printPri():
+    for item in l:
+        if type(item) is not int:
+            print "p:", item.priority, " ",
 
+printPri()
 print '\n\n'
+print 'peek', pq.peek().priority
+
+i = pq.pop()
+print i.priority
+print
+printPri()
+
+print 'peek', pq.peek().priority
+i = pq.pop()
+print i.priority
+print
+printPri()
+print 'peek', pq.peek().priority
+
+i = pq.pop()
+print i.priority
+print
+printPri()
+
 
