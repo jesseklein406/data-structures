@@ -8,7 +8,7 @@ import pytest
 from priorityq import PriorityQ, Item
 
 
-@pytest.structure(scope="module")
+@pytest.fixture(scope="module")
 def build_priorityq():
     built = PriorityQ()
     jim = Item("jim", 5)
@@ -24,7 +24,7 @@ def build_priorityq():
     return built
 
 
-@pytest.structure(scope="function")
+@pytest.fixture(scope="function")
 def build_empty_q():
     empty = PriorityQ()
 
