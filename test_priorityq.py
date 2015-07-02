@@ -14,7 +14,7 @@ def build_priorityq():
     jim = Item("jim", 5)
     allen = Item("allen", 1)
     number2 = Item(2, 2)
-    number3 = Item(3, 2)
+    number3 = Item(3, 3)
 
     built.insert(jim)       # heapList = [0, 5]
     built.insert(allen)     # heapList = [0, 1, 5]
@@ -31,6 +31,8 @@ def build_empty_q():
     return empty
 
 
+# test the binheap list associated with the priority queue by slicing
+# the list of Item objects and accessing the priority attribute
 def test_built_list(build_priorityq):
     sliced_list = [i.priority for i in build_priorityq.pqheap.heapList[1:]]
     assert sliced_list == [1, 3, 2, 5]
