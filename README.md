@@ -18,3 +18,14 @@ Use Stack class from stack.py to implement the class and its methods, push(value
 ###Doubly Linked List Data Structures Assignment
 Access 'dll.py' for the class Dll and create a doubly linked list to hold data.
 The test file for the module is 'test_dll.py'.
+
+
+###Binary Heap Data Structures Assignment
+Access 'binheap.py' for the class Binheap and create a doubly linked list to hold data.
+The test file for the module is 'test_binheap.py'.
+
+
+###Priority Queue Data Structures Assignment
+Access 'priorityq.py' for the class PriorityQ and create a doubly linked list to hold data.
+The test file for the module is 'test_priorityq.py'. This assignment heavily uses code from
+the previous binary heap assignment.
