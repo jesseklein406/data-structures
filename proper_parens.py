@@ -14,9 +14,9 @@ def proper_parens(parens_string):
     parens_string - input string to be evaluated
     """
     stack = []
-    
-    for char in parens_string:
-        if char == "(":
+
+    for char in parens_string:   # Allow any iterable of chars or values here
+        if char == "(":          # else let an exception raise naturally
             stack.append(char)
         elif char == ")":
             try:
