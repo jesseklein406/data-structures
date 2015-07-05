@@ -10,3 +10,5 @@ The function will:
 Return 1 if the string is "open" (there are open parens that are not closed)
 Return 0 if the string is "balanced" (there are an equal number of open and closed parentheses in the string)
 Return -1 if the string is "broken" (a closing parens has not been proceeded by one that opens)
+
+The approach of using a list to hold the parens requires one less assignment per parens character using the 'counter' approach, as I learned from Cris Ewing.
