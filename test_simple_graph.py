@@ -71,13 +71,13 @@ def test_del_node(build_graph):
     assert current_node not in build_graph.nodes()
 
     # check that its edges are removed as well
-    assert current_node not in zip(*build_graph.edges())[0]  # unzip trick
-    assert current_node not in zip(*build_graph.edges())[1]
+    for edge in build_graph.edges():
+        assert current_node not in edge
 
 
 def test_del_node_nonexistent(build_graph):
     new_node = simple_graph.Node('new', 1)
-    with pytest.raises(ValueError):
+    with pytest.raises(KeyError):
         build_graph.del_node(new_node)
 
 
@@ -85,12 +85,12 @@ def test_del_node_nonexistent(build_graph):
 # raises an error if no such edge exists
 def test_del_edge(build_graph):
     current_edge = build_graph.edges()[0]
-    build_graph.del_edge(current_edge)
+    build_graph.del_edge(*current_edge)
     assert current_edge not in build_graph.edges()
 
     # try to delete, check for error
-    with pytest.raises(ValueError):
-        build_graph.del_edge(current_edge)
+    with pytest.raises(KeyError):
+        build_graph.del_edge(*current_edge)
 
 
 # g.has_node(n): True if node 'n' is contained in the graph, False if not.
@@ -98,23 +98,24 @@ def test_has_node(build_graph):
     current_node = build_graph.nodes()[0]
     assert build_graph.has_node(current_node)
 
-    build_graph.del_node(current_node)
 
-    assert not build_graph.has_node(current_node)
+def test_has_no_node(build_graph):
+    new_node = simple_graph.Node('new', 1)
+    assert not build_graph.has_node(new_node)
 
 
 # g.neighbors(n): returns the list of all nodes connected to 'n' by edges,
 # raises an error if n is not in g
 def test_neighbors(build_graph):
     current_node = build_graph.nodes()[0]
-    neighbors = []
+    neighbors = set()
     for edge in build_graph.edges():
         if edge[0] is current_node:
-            neighbors.append(edge[1])
+            neighbors.add(edge[1])
         if edge[1] is current_node:
-            neighbors.append(edge[0])
+            neighbors.add(edge[0])
 
-    assert build_graph.neighbors(current_node) == neighbors
+    assert build_graph.neighbors(current_node) == list(neighbors)
 
 
 def test_neighbors_nonexistent(build_graph):
@@ -127,7 +128,7 @@ def test_neighbors_nonexistent(build_graph):
 # False if not, raises an error if either of the supplied nodes are not in g
 def test_adjacent(build_graph):
     current_node1 = build_graph.nodes()[0]
-    current_node2 = build_graph.neighbors(current_node1)[0]
+    current_node2 = build_graph.neighbors(current_node1)[0]   # pull a neighbor
     assert build_graph.adjacent(current_node1, current_node2)
 
     new_node = simple_graph.Node('new', 1)
@@ -139,4 +140,4 @@ def test_adjacent_nonexistent(build_graph):
     current_node = build_graph.nodes()[0]
     new_node = simple_graph.Node('new', 1)
     with pytest.raises(ValueError):
-        build_graph.neighbors(current_node, new_node)
+        build_graph.adjacent(current_node, new_node)
