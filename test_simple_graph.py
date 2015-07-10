@@ -112,8 +112,6 @@ def test_neighbors(build_graph):
     for edge in build_graph.edges():
         if edge[0] is current_node:
             neighbors.add(edge[1])
-        if edge[1] is current_node:
-            neighbors.add(edge[0])
 
     assert build_graph.neighbors(current_node) == list(neighbors)
 
