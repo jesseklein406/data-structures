@@ -78,8 +78,6 @@ class G(tuple):
         for edge in self.edges_:
             if edge[0] is n:
                 neighbors.add(edge[1])
-            if edge[1] is n:
-                neighbors.add(edge[0])
 
         return list(neighbors)
 
