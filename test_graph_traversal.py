@@ -7,7 +7,7 @@ import graph_traversal as gt
 import pytest
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="module")
 def node_list():
     node_list = []
     for i in range(101):
@@ -25,8 +25,8 @@ def wide_graph(node_list):
         2     3   4
        /|    /|   |\
       5 6   7 8   9 1O
-     / /|  /| |\  |\ \
-    11................20
+     /| |\ /| |\ /| |\
+    11................22
     """
 
     wide_graph = gt.G()
@@ -41,17 +41,29 @@ def wide_graph(node_list):
     wide_graph.add_edge(node_list[4], node_list[9])
     wide_graph.add_edge(node_list[4], node_list[10])
     wide_graph.add_edge(node_list[5], node_list[11])
-    wide_graph.add_edge(node_list[6], node_list[12])
+    wide_graph.add_edge(node_list[5], node_list[12])
     wide_graph.add_edge(node_list[6], node_list[13])
-    wide_graph.add_edge(node_list[7], node_list[14])
+    wide_graph.add_edge(node_list[6], node_list[14])
     wide_graph.add_edge(node_list[7], node_list[15])
-    wide_graph.add_edge(node_list[8], node_list[16])
+    wide_graph.add_edge(node_list[7], node_list[16])
     wide_graph.add_edge(node_list[8], node_list[17])
-    wide_graph.add_edge(node_list[9], node_list[18])
+    wide_graph.add_edge(node_list[8], node_list[18])
     wide_graph.add_edge(node_list[9], node_list[19])
-    wide_graph.add_edge(node_list[10], node_list[20])
+    wide_graph.add_edge(node_list[9], node_list[20])
+    wide_graph.add_edge(node_list[10], node_list[21])
+    wide_graph.add_edge(node_list[10], node_list[22])
 
     return wide_graph
+
+
+@pytest.fixture(scope="module")
+def wide_graph_map(node_list):
+    wide_graph_map = {
+        'first': [node_list[1]],
+        'second': [node_list[2], node_list[3], node_list[4]],
+        'third': [node_list[i] for i in range(5, 11)],
+        'fourth': [node_list[i] for i in range(11, 23)]
+    }
 
 
 @pytest.fixture(scope="function")
@@ -178,3 +190,83 @@ def cyclic_graph(node_list):
     cyclic_graph.add_edge(node_list[10], node_list[1])
 
     return cyclic_graph
+
+
+# g.depth_first_traversal(start): Perform a full depth-first traversal of the
+# graph beginning at start. Return the full visited path when traversal is
+# complete.
+
+def test_dft_on_wide_at_root(wide_graph, node_list, wide_graph_map):
+    start = node_list[1]
+    actual = wide_graph.depth_first_traversal(start)
+
+    for node in enumerate(actual):
+        for item in wide_graph_map.iteritems():
+            if node[1] in item[1]:
+                actual[node[0]] = item[0]
+
+    expected = []
+
+
+def test_dft_on_wide_at_middle(wide_graph):
+    pass
+
+
+def test_dft_on_long_at_root(long_graph):
+    pass
+
+
+def test_dft_on_long_at_middle(long_graph):
+    pass
+
+
+def test_dft_on_huge_at_root(huge_graph):
+    pass
+
+
+def test_dft_on_huge_at_middle(huge_graph):
+    pass
+
+
+def test_dft_on_small(small_graph):
+    pass
+
+
+def test_dft_on_cyclic(cyclic_graph):
+    pass
+
+
+# g.breadth_first_traversal(start): Perform a full breadth-first traversal of
+# the graph, beginning at start. Return the full visited path when traversal is
+# complete.
+
+def test_bft_on_wide_at_root(wide_graph):
+    pass
+
+
+def test_bft_on_wide_at_middle(wide_graph):
+    pass
+
+
+def test_bft_on_long_at_root(long_graph):
+    pass
+
+
+def test_bft_on_long_at_middle(long_graph):
+    pass
+
+
+def test_bft_on_huge_at_root(huge_graph):
+    pass
+
+
+def test_bft_on_huge_at_middle(huge_graph):
+    pass
+
+
+def test_bft_on_small(small_graph):
+    pass
+
+
+def test_bft_on_cyclic(cyclic_graph):
+    pass
