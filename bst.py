@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 class Node(object):
 
-    size = 0
+    # size = 0
 
     def __init__(self, value):
         self.value = value
@@ -41,12 +41,15 @@ class Node(object):
                 return self.right.conains(value)
 
     def size(self):
-        return self.__class__.size
+        # return self.__class__.size
+        if self.left is None and self.right is None:
+            return 1
+        return sum(self.left.size(), self.right.size()) + 1
 
     def depth(self):
-        if self.left == None and self.right == None:
+        if self.left is None and self.right is None:
             return 1
-        return max(depth(self.left), depth(self.right)) + 1
+        return max(self.left.depth(), self.right.depth()) + 1
 
     def balance(self):
         return self.left.depth() - self.right.depth()
