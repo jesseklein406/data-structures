@@ -59,34 +59,36 @@ def wide_graph(node_list):
 @pytest.fixture(scope="module")
 def wide_graph_map(node_list):
     wide_graph_map = {
-        'first': [node_list[1]],
-        'second': [node_list[2], node_list[3], node_list[4]],
-        'third': [node_list[i] for i in range(5, 11)],
-        'fourth': [node_list[i] for i in range(11, 23)]
+        1: [node_list[1]],
+        2: [node_list[2], node_list[3], node_list[4]],
+        3: [node_list[i] for i in range(5, 11)],
+        4: [node_list[i] for i in range(11, 23)]
     }
+
+    return wide_graph_map
 
 
 @pytest.fixture(scope="function")
 def long_graph(node_list):
     """
-     1
-     |
-     2
-     |\
+       1
+       |
+       2
+      /|
      3 4
-     |\
+      /|
      5 6
-     |\
+      /|
      7 8
-     |\
+      /|
      9 10
-     |\
+      /|
     11 12
-     |\
+      /|
     13 14
-     |\
+      /|
     15 16
-     |\
+      /|
     17 18
     """
 
@@ -95,20 +97,20 @@ def long_graph(node_list):
     long_graph.add_edge(node_list[1], node_list[2])
     long_graph.add_edge(node_list[2], node_list[3])
     long_graph.add_edge(node_list[2], node_list[4])
-    long_graph.add_edge(node_list[3], node_list[5])
-    long_graph.add_edge(node_list[3], node_list[6])
-    long_graph.add_edge(node_list[5], node_list[7])
-    long_graph.add_edge(node_list[5], node_list[8])
-    long_graph.add_edge(node_list[7], node_list[8])
-    long_graph.add_edge(node_list[7], node_list[10])
-    long_graph.add_edge(node_list[9], node_list[11])
-    long_graph.add_edge(node_list[9], node_list[12])
-    long_graph.add_edge(node_list[11], node_list[13])
-    long_graph.add_edge(node_list[11], node_list[14])
-    long_graph.add_edge(node_list[13], node_list[15])
-    long_graph.add_edge(node_list[13], node_list[16])
-    long_graph.add_edge(node_list[15], node_list[17])
-    long_graph.add_edge(node_list[15], node_list[18])
+    long_graph.add_edge(node_list[4], node_list[5])
+    long_graph.add_edge(node_list[4], node_list[6])
+    long_graph.add_edge(node_list[6], node_list[7])
+    long_graph.add_edge(node_list[6], node_list[8])
+    long_graph.add_edge(node_list[8], node_list[8])
+    long_graph.add_edge(node_list[8], node_list[10])
+    long_graph.add_edge(node_list[10], node_list[11])
+    long_graph.add_edge(node_list[10], node_list[12])
+    long_graph.add_edge(node_list[12], node_list[13])
+    long_graph.add_edge(node_list[12], node_list[14])
+    long_graph.add_edge(node_list[14], node_list[15])
+    long_graph.add_edge(node_list[14], node_list[16])
+    long_graph.add_edge(node_list[16], node_list[17])
+    long_graph.add_edge(node_list[16], node_list[18])
 
     return long_graph
 
@@ -205,15 +207,34 @@ def test_dft_on_wide_at_root(wide_graph, node_list, wide_graph_map):
             if node[1] in item[1]:
                 actual[node[0]] = item[0]
 
-    expected = []
+    expected = [
+        1, 2, 3, 4, 4, 3, 4, 4, 2, 3, 4,
+        4, 3, 4, 4, 2, 3, 4, 4, 3, 4, 4
+    ]
+
+    assert expected == actual
 
 
 def test_dft_on_wide_at_middle(wide_graph):
-    pass
+    start = node_list[2]
+    actual = wide_graph.depth_first_traversal(start)
+
+    for node in enumerate(actual):
+        for item in wide_graph_map.iteritems():
+            if node[1] in item[1]:
+                actual[node[0]] = item[0]
+
+    expected = [2, 3, 4, 4, 3, 4, 4]
+
+    assert expected == actual
 
 
 def test_dft_on_long_at_root(long_graph):
-    pass
+    start = node_list[1]
+    actual = long_graph.depth_first_traversal(start)
+
+    actual_values = [i.value for i in actual]
+    
 
 
 def test_dft_on_long_at_middle(long_graph):
