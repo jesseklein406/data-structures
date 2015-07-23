@@ -91,6 +91,46 @@ class Node(object):
             return self.left.depth()
         return self.left.depth() - self.right.depth()
 
+    def pre_order(self):
+        parent_stack = []
+        while parent_stack or self is not None:
+            if self is not None:
+                yield self
+                if self.right is not None: 
+                    parent_stack.append(self.right)
+                self = self.left
+            else:
+                self = parent_stack.pop()
+
+    def in_order(self):
+        parent_stack = []
+        while parent_stack or self is not None:
+            if self is not None:
+                parent_stack.append(self)
+                self = self.left
+            else:
+                self = parent_stack.pop()
+                yield self
+                self = self.right
+
+    def post_order(self):
+        parent_stack = []
+        last_node = None
+        while parent_stack or self is not None:
+            if self is not None:
+                parent_stack.append(self)
+                self = self.left
+            else:
+                peek = parent_stack[-1]
+                if peek.right is not None and last_node is not peek.right:
+                    self = peek.right
+                else:
+                    yield peek
+                    last_node = parent_stack.pop()
+
+    def breadth_order(self):
+        queue = []
+
 
 if __name__ == '__main__':
     from timeit import Timer
