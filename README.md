@@ -38,7 +38,7 @@ the previous binary heap assignment. Thanks to Martin Broadhurst for a great res
 
 
 #Data Structures Assignments 2nd Half
-####Jesse Klein & Muoi Ly
+####Jesse Klein & Saki Fu
 
 
 ###Binary Search Tree
