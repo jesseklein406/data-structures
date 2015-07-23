@@ -1,4 +1,4 @@
-#Data Structures Assignments
+#Data Structures Assignments 1st Half
 ####Jesse Klein & Muoi Ly
 
 
@@ -35,3 +35,12 @@ the previous binary heap assignment.
 Access 'simple_graph.py' for the class G and create a graph object to hold data.
 The test file for the module is 'test_simple_graph.py'. This assignment heavily uses code from
 the previous binary heap assignment. Thanks to Martin Broadhurst for a great resource. http://www.martinbroadhurst.com/graph-data-structures.html
+
+
+#Data Structures Assignments 2nd Half
+####Jesse Klein & Muoi Ly
+
+
+###Binary Search Tree
+Access 'bst.py' for the class Node and create a binary search tree. The test
+file for the module is 'test_bst.py'. We referred to [Wikipedia](https://en.wikipedia.org/wiki/Binary_search_tree) and [SmCaterpillar](http://stackoverflow.com/questions/29379213/depth-of-a-binary-search-tree-in-python) on Stack Overflow.
