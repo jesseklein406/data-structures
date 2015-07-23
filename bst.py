@@ -5,19 +5,30 @@ from __future__ import unicode_literals
 
 
 class Node(object):
+    """
+    A Node class that will create instances of nodes, all of which can
+    represent the root of a binary search tree.
+    """
     def __init__(self, value):
+        """
+        Make a new nodes object with a value given as the argument
+        """
         self.value = value
-        self.left = None
+        self.left = None    # initially set pointers to None
         self.right = None
 
     def insert(self, value):
+        """
+        Insert a new node into a tree with value given as argument if value
+        is not present, else do nothing
+        """
         if value == self.value:
-            return
+            return   # if value exists, do nothing
         elif value < self.value:
             if self.left is None:
-                self.left = Node(value)
+                self.left = Node(value)  # create value at empty pointer
             else:
-                return self.left.insert(value)
+                return self.left.insert(value)  # repeat for next node
         else:
             if self.right is None:
                 self.right = Node(value)
@@ -25,6 +36,10 @@ class Node(object):
                 return self.right.insert(value)
 
     def contains(self, value):
+        """
+        Check a tree for a node with value given as argument, return True
+        if the value is present, False if not
+        """
         if value == self.value:
             return True
         elif value < self.value:
@@ -39,24 +54,35 @@ class Node(object):
                 return self.right.contains(value)
 
     def size(self):
+        """
+        Return the number of nodes in a tree
+        """
         if self.left is None and self.right is None:
             return 1
         if self.left is None:
-            return self.right.size() + 1
-        if self.right is None:
+            return self.right.size() + 1   # Add 1 to the sum of branch sizes
+        if self.right is None:             # to account for self
             return self.left.size() + 1
         return self.left.size() + self.right.size() + 1
 
     def depth(self):
+        """
+        Return the depth of the tree
+        """
         if self.left is None and self.right is None:
             return 1
         if self.left is None:
-            return self.right.depth() + 1
+            return self.right.depth() + 1   # A single node has a depth of 1
         if self.right is None:
             return self.left.depth() + 1
         return max(self.left.depth(), self.right.depth()) + 1
 
     def balance(self):
+        """
+        Return a positive balance if the root's left side is deeper,
+        negative balance if the right side is deeper, and zero if
+        the tree is balanced
+        """
         if self.left is None and self.right is None:
             return 0
         if self.left is None:
