@@ -94,3 +94,51 @@ def test_built_no_branches_depth(built_tree_no_branches):
 
 def test_built_no_branches_balance(built_tree_no_branches):
     assert built_tree_no_branches.balance() == -10
+
+
+def test_built_tree_pre_order_dft(built_tree):
+    expected = [10, 5, 3, 2, 4, 7, 6, 9, 15, 12, 11, 14, 20, 18, 22]
+    actual = [node.value for node in list(built_tree.pre_order())]
+    assert actual == expected
+
+
+def test_no_branches_pre_order_dft(built_tree_no_branches):
+    expected = range(10, 21)
+    actual = [node.value for node in list(built_tree_no_branches.in_order())]
+    assert actual == expected
+
+
+def test_built_tree_in_order_dft(built_tree):
+    expected = [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 14, 15, 18, 20, 22]
+    actual = [node.value for node in list(built_tree.in_order())]
+    assert actual == expected
+
+
+def test_no_branches_in_order_dft(built_tree_no_branches):
+    expected = range(10, 21)
+    actual = [node.value for node in list(built_tree_no_branches.in_order())]
+    assert actual == expected
+
+
+def test_built_tree_post_order_dft(built_tree):
+    expected = [2, 4, 3, 6, 9, 7, 5, 11, 14, 12, 18, 22, 20, 15, 10]
+    actual = [node.value for node in list(built_tree.post_order())]
+    assert actual == expected
+
+
+def test_no_branches_post_order_dft(built_tree_no_branches):
+    expected = range(20, 9, -1)
+    actual = [node.value for node in list(built_tree_no_branches.post_order())]
+    assert actual == expected
+
+
+def test_built_tree_bft(built_tree):
+    expected = [10, 5, 15, 3, 7, 12, 20, 2, 4, 6, 9, 11, 14, 18, 22]
+    actual = [node.value for node in list(built_tree.breadth_order())]
+    assert actual == expected
+
+
+def test_no_branches_bft(built_tree_no_branches):
+    expected = range(10, 21)
+    actual = [node.value for node in list(built_tree_no_branches.breadth_order())]
+    assert actual == expected

@@ -4,6 +4,38 @@
 from __future__ import unicode_literals
 
 
+# use queue from queue assigment
+class QueueNode(object):
+    def __init__(self, value):
+        self.value = value
+        self.next_node = None
+
+
+class Queue(object):
+    def __init__(self, iterable=None):
+        self.size = 0
+        self.head = None
+
+    def insert(self, val):
+        new_node = QueueNode(val)
+        current = self.head
+
+        if current is None:
+            self.head = new_node
+            self.size += 1
+        else:
+            while current.next_node is not None:
+                current = current.next_node
+            current.next_node = new_node
+            self.size += 1
+
+    def pop(self):
+        value = self.head.value
+        self.head = self.head.next_node
+        self.size -= 1
+        return value
+
+
 class Node(object):
     """
     A Node class that will create instances of nodes, all of which can
@@ -96,7 +128,7 @@ class Node(object):
         while parent_stack or self is not None:
             if self is not None:
                 yield self
-                if self.right is not None: 
+                if self.right is not None:
                     parent_stack.append(self.right)
                 self = self.left
             else:
@@ -129,7 +161,15 @@ class Node(object):
                     last_node = parent_stack.pop()
 
     def breadth_order(self):
-        queue = []
+        queue = Queue()
+        queue.insert(self)
+        while queue.size is not 0:
+            self = queue.pop()
+            yield self
+            if self.left is not None:
+                queue.insert(self.left)
+            if self.right is not None:
+                queue.insert(self.right)
 
 
 if __name__ == '__main__':
