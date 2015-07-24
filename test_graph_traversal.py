@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""Test for graph traversal"""
+"""Test for graph traversal"""'''
 
 from __future__ import unicode_literals
 import graph_traversal as gt
@@ -290,4 +290,4 @@ def test_bft_on_small(small_graph):
 
 
 def test_bft_on_cyclic(cyclic_graph):
-    pass
+    pass'''
