@@ -89,25 +89,17 @@ class Node(object):
         """
         Return the number of nodes in a tree
         """
-        if self.left is None and self.right is None:
-            return 1
-        if self.left is None:
-            return self.right.size() + 1   # Add 1 to the sum of branch sizes
-        if self.right is None:             # to account for self
-            return self.left.size() + 1
-        return self.left.size() + self.right.size() + 1
+        l = self.left.size() if self.left else 0
+        r = self.right.size() if self.right else 0
+        return l + r + 1
 
     def depth(self):
         """
         Return the depth of the tree
         """
-        if self.left is None and self.right is None:
-            return 1
-        if self.left is None:
-            return self.right.depth() + 1   # A single node has a depth of 1
-        if self.right is None:
-            return self.left.depth() + 1
-        return max(self.left.depth(), self.right.depth()) + 1
+        l = self.left.depth() if self.left else 0
+        r = self.right.depth() if self.right else 0
+        return max(l, r) + 1
 
     def balance(self):
         """
@@ -115,19 +107,21 @@ class Node(object):
         negative balance if the right side is deeper, and zero if
         the tree is balanced
         """
-        if self.left is None and self.right is None:
-            return 0
-        if self.left is None:
-            return -1 * self.right.depth()
-        if self.right is None:
-            return self.left.depth()
-        return self.left.depth() - self.right.depth()
+        l = self.left.depth() if self.left else 0
+        r = self.right.depth() if self.right else 0
+        return l - r
 
+    # Depth first traverals
     def pre_order(self):
+        """
+        Call a pre-order depth first traversal generator.
+        Return nodes in turn from generator.
+        """
         parent_stack = []
         while parent_stack or self is not None:
             if self is not None:
                 yield self
+                # self is the symbol for the currently traversed node
                 if self.right is not None:
                     parent_stack.append(self.right)
                 self = self.left
@@ -135,6 +129,10 @@ class Node(object):
                 self = parent_stack.pop()
 
     def in_order(self):
+        """
+        Call an in-order depth first traversal generator.
+        Return nodes in turn from generator.
+        """
         parent_stack = []
         while parent_stack or self is not None:
             if self is not None:
@@ -146,6 +144,10 @@ class Node(object):
                 self = self.right
 
     def post_order(self):
+        """
+        Call a post-order depth first traversal generator.
+        Return nodes in turn from generator.
+        """
         parent_stack = []
         last_node = None
         while parent_stack or self is not None:
@@ -161,7 +163,12 @@ class Node(object):
                     last_node = parent_stack.pop()
 
     def breadth_order(self):
-        queue = Queue()
+        """
+        Call a breadth first traversal generator.
+        Return nodes in turn from generator. Use a queue
+        object to maintain first in first out order.
+        """
+        queue = Queue()   # queue class from above
         queue.insert(self)
         while queue.size is not 0:
             self = queue.pop()

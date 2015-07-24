@@ -44,3 +44,7 @@ the previous binary heap assignment. Thanks to Martin Broadhurst for a great res
 ###Binary Search Tree
 Access 'bst.py' for the class Node and create a binary search tree. The test
 file for the module is 'test_bst.py'. We referred to [Wikipedia](https://en.wikipedia.org/wiki/Binary_search_tree) and [SmCaterpillar](http://stackoverflow.com/questions/29379213/depth-of-a-binary-search-tree-in-python) on Stack Overflow.
+
+
+###Binary Search Tree Traversals
+Access 'bst.py' for the class Node and create a binary search tree with traversal methods. The test file for the module is 'test_bst.py'. We referred to Wikipedia [here](https://en.wikipedia.org/wiki/Binary_search_tree) and [here](https://en.wikipedia.org/wiki/Tree_traversal).
