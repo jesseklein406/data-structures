@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jesseklein406/data-structures.svg?branch=bst2)](https://travis-ci.org/jesseklein406/data-structures)
+
 #Data Structures Assignments 1st Half
 ####Jesse Klein & Muoi Ly
 
