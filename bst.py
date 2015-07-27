@@ -178,6 +178,46 @@ class Node(object):
             if self.right is not None:
                 queue.insert(self.right)
 
+    def find_successor(self, val):
+        while self.left:
+            self = self.left
+        return self
+
+    def find_predecessor(self,val):
+        while self.right:
+            self = self.right
+        return self
+
+    def replace_node_in_parent(self, parent=None, new_node=None):
+        if parent:
+            if self == parent.left:
+                parent.left = new_node
+            else:
+                parent.right = new_node
+
+    def delete(self, value, parent=None):
+        if value < self.value:
+            self.left.delete(value, parent=self)
+        elif value > self.value:
+            self.right.delete(value, parent=self)
+        else:
+            if self.left and self.right:
+                if self.balance() < 0:
+                    replacement = self.right.find_successor()
+                else:
+                    replacement = self.left.find_predeessor()
+                self.value = replacement.value
+                replacement.delete(replacement.value)
+            elif self.left:
+                self.replace_node_in_parent(parent=parent, new_node=self.left)
+            elif self.right:
+                self.replace_node_in_parent(parent=parent, new_node=self.right)
+            else:
+                self.replace_node_in_parent(parent=parent, new_node=None)
+
+
+
+
 
 if __name__ == '__main__':
     from timeit import Timer
