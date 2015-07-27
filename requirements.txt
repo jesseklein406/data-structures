@@ -1,5 +1,6 @@
 extras==0.0.3
 fuzzywuzzy==0.6.0
+graphviz==0.4.5
 lettuce==0.2.20
 linecache2==1.0.0
 mock==1.0.1
