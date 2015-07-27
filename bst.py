@@ -217,8 +217,6 @@ class Node(object):
 
 
 
-
-
 if __name__ == '__main__':
     from timeit import Timer
     tree_root = Node(10)
