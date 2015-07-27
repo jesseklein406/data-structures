@@ -178,17 +178,17 @@ class Node(object):
             if self.right is not None:
                 queue.insert(self.right)
 
-    def find_successor(self, val):
+    def _find_successor(self):
         while self.left:
             self = self.left
         return self
 
-    def find_predecessor(self,val):
+    def _find_predecessor(self):
         while self.right:
             self = self.right
         return self
 
-    def replace_node_in_parent(self, parent=None, new_node=None):
+    def _replace_node_in_parent(self, parent=None, new_node=None):
         if parent:
             if self == parent.left:
                 parent.left = new_node
@@ -203,20 +203,56 @@ class Node(object):
         else:
             if self.left and self.right:
                 if self.balance() < 0:
-                    replacement = self.right.find_successor()
+                    replacement = self.right._find_successor()
                 else:
-                    replacement = self.left.find_predeessor()
+                    replacement = self.left._find_predecessor()
                 self.value = replacement.value
                 replacement.delete(replacement.value)
             elif self.left:
-                self.replace_node_in_parent(parent=parent, new_node=self.left)
+                self._replace_node_in_parent(parent=parent, new_node=self.left)
             elif self.right:
-                self.replace_node_in_parent(parent=parent, new_node=self.right)
+                self._replace_node_in_parent(parent=parent, new_node=self.right)
             else:
-                self.replace_node_in_parent(parent=parent, new_node=None)
+                self._replace_node_in_parent(parent=parent, new_node=None)
+
+    def get_dot(self):
+            """return the tree with root 'self' as a dot graph for visualization"""
+            return "digraph G{\n%s}" % ("" if self.value is None else (
+                "\t%s;\n%s\n" % (
+                    self.value,
+                    "\n".join(self._get_dot())
+                )
+            ))
+
+    def _get_dot(self):
+        """recursively prepare a dot graph entry for this node."""
+        import random
+        if self.left is not None:
+            yield "\t%s -> %s;" % (self.value, self.left.value)
+            for i in self.left._get_dot():
+                yield i
+        elif self.right is not None:
+            r = random.randint(0, 1e9)
+            yield "\tnull%s [shape=point];" % r
+            yield "\t%s -> null%s;" % (self.value, r)
+        if self.right is not None:
+            yield "\t%s -> %s;" % (self.value, self.right.value)
+            for i in self.right._get_dot():
+                yield i
+        elif self.left is not None:
+            r = random.randint(0, 1e9)
+            yield "\tnull%s [shape=point];" % r
+            yield "\t%s -> null%s;" % (self.value, r)
+
+<<<<<<< HEAD
+=======
+    def save_render(self, savefile="tree.gv"):
+            from graphviz import Source
+            src = Source(self.get_dot())
+            src.render(savefile)
 
 
-
+>>>>>>> 945172df44a5095e79872f31648b3bf806cc30e7
 if __name__ == '__main__':
     from timeit import Timer
     tree_root = Node(10)
