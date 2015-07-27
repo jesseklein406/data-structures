@@ -178,15 +178,13 @@ class Node(object):
             if self.right is not None:
                 queue.insert(self.right)
 
-    def _find_successor(self):
-        parent = None
+    def _find_successor(self, parent=None):
         while self.left:
             parent = self
             self = self.left
         return self, parent
 
-    def _find_predecessor(self):
-        parent = None
+    def _find_predecessor(self, parent=None):
         while self.right:
             parent = self
             self = self.right
@@ -207,9 +205,9 @@ class Node(object):
         else:
             if self.left and self.right:
                 if self.balance() < 0:
-                    replacement, r_parent = self.right._find_successor()
+                    replacement, r_parent = self.right._find_successor(parent=self)
                 else:
-                    replacement, r_parent = self.left._find_predecessor()
+                    replacement, r_parent = self.left._find_predecessor(parent=self)
                 self.value = replacement.value
                 replacement.delete(replacement.value, r_parent)
             elif self.left:
