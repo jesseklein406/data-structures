@@ -190,13 +190,6 @@ class Node(object):
             self = self.right
         return self, parent
 
-    def _replace_node_in_parent(self, parent=None, new_node=None):
-        if parent:
-            if self == parent.left:
-                parent.left = new_node
-            else:
-                parent.right = new_node
-
     def delete(self, value, parent=None):
         if not self.contains(value):
             return None
@@ -211,7 +204,7 @@ class Node(object):
                 else:
                     replacement, r_parent = self.left._find_predecessor(parent=self)
                 self.value = replacement.value
-                replacement.delete(replacement.value, r_parent)
+                replacement.delete(replacement.value, parent=r_parent)
             elif parent:
                 if self == parent.left:
                     parent.left = None
