@@ -3,11 +3,11 @@ digraph G{
 	10 -> 4;
 	4 -> 3;
 	3 -> 2;
-	null911529920 [shape=point];
-	3 -> null911529920;
+	null15842890 [shape=point];
+	3 -> null15842890;
 	4 -> 6;
-	null778123745 [shape=point];
-	6 -> null778123745;
+	null397586084 [shape=point];
+	6 -> null397586084;
 	6 -> 9;
 	10 -> 15;
 	15 -> 12;
