@@ -178,46 +178,38 @@ class Node(object):
             if self.right is not None:
                 queue.insert(self.right)
 
-    def _find_successor(self):
-        parent = None
+    def _find_successor(self, parent=None):
         while self.left:
             parent = self
             self = self.left
         return self, parent
 
-    def _find_predecessor(self):
-        parent = None
+    def _find_predecessor(self, parent=None):
         while self.right:
             parent = self
             self = self.right
         return self, parent
 
-    def _replace_node_in_parent(self, parent=None, new_node=None):
-        if parent:
-            if self == parent.left:
-                parent.left = new_node
-            else:
-                parent.right = new_node
-
     def delete(self, value, parent=None):
+        if not self.contains(value):
+            return None
         if value < self.value:
             self.left.delete(value, parent=self)
         elif value > self.value:
             self.right.delete(value, parent=self)
         else:
-            if self.left and self.right:
+            if self.left or self.right:
                 if self.balance() < 0:
-                    replacement, r_parent = self.right._find_successor()
+                    replacement, r_parent = self.right._find_successor(parent=self)
                 else:
-                    replacement, r_parent = self.left._find_predecessor()
+                    replacement, r_parent = self.left._find_predecessor(parent=self)
                 self.value = replacement.value
-                replacement.delete(replacement.value, r_parent)
-            elif self.left:
-                self._replace_node_in_parent(parent=parent, new_node=self.left)
-            elif self.right:
-                self._replace_node_in_parent(parent=parent, new_node=self.right)
-            else:
-                self._replace_node_in_parent(parent=parent, new_node=None)
+                replacement.delete(replacement.value, parent=r_parent)
+            elif parent:
+                if self == parent.left:
+                    parent.left = None
+                else:
+                    parent.right = None
 
     def get_dot(self):
             """return the tree with root 'self' as a dot graph for visualization"""
