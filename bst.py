@@ -215,27 +215,29 @@ class Node(object):
         pivot = self.right
         self.right = pivot.left
         pivot.left = self
-        self = pivot
 
     def right_rotation(self):
         pivot = self.left
         self.left = pivot.right
         pivot.right = self
-        self = pivot
 
     def rebalance(self):
         if self.balance() < -1:
-            if self.right.balance() <= 0:
+            pivot = self.right
+            if pivot.balance() <= 0:
                 self.left_rotation()
             else:
-                self.right_rotation()
+                pivot.right_rotation()
                 self.left_rotation()
+            pivot.rebalance()
         if self.balance() > 1:
-            if self.left.balance() >= 0:
+            pivot = self.left
+            if pivot.balance() >= 0:
                 self.right_rotation()
             else:
-                self.left_rotation()
+                pivot.left_rotation()
                 self.right_rotation()
+            pivot.rebalance()
 
     def get_dot(self):
             """return the tree with root 'self' as a dot graph for visualization"""
