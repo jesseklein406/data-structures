@@ -211,6 +211,33 @@ class Node(object):
                 else:
                     parent.right = None
 
+    def left_rotation(self):
+        pivot = self.right
+        self.right = pivot.left
+        pivot.left = self
+        self = pivot
+
+    def right_rotation(self):
+        pivot = self.left
+        self.left = pivot.right
+        pivot.right = self
+        self = pivot
+
+    def rebalance(self):
+        while self.balance() not in [-1, 0, 1]:
+            if self.balance < -1:
+                if self.right.balance <= 0:
+                    self.left_rotation()
+                else:
+                    self.right_rotation()
+                    self.left_rotation()
+            if self.balance > 1:
+                if self.left.balance >= 0:
+                    self.right_rotation()
+                else:
+                    self.left_rotation()
+                    self.right_rotation()
+
     def get_dot(self):
             """return the tree with root 'self' as a dot graph for visualization"""
             return "digraph G{\n%s}" % ("" if self.value is None else (
@@ -240,15 +267,12 @@ class Node(object):
             yield "\tnull%s [shape=point];" % r
             yield "\t%s -> null%s;" % (self.value, r)
 
-<<<<<<< HEAD
-=======
     def save_render(self, savefile="tree.gv"):
             from graphviz import Source
             src = Source(self.get_dot())
             src.render(savefile)
 
 
->>>>>>> 945172df44a5095e79872f31648b3bf806cc30e7
 if __name__ == '__main__':
     from timeit import Timer
     tree_root = Node(10)
