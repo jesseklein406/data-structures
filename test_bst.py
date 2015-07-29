@@ -142,3 +142,86 @@ def test_no_branches_bft(built_tree_no_branches):
     expected = range(10, 21)
     actual = [node.value for node in list(built_tree_no_branches.breadth_order())]
     assert actual == expected
+
+
+# * * * * *#
+# Deletion #
+# * * * * *#
+
+
+@pytest.fixture(scope="function")
+def small_tree():
+    small_tree = bst.Node(10)
+    small_tree.insert(2)
+    small_tree.insert(18)
+    return small_tree
+
+
+@pytest.fixture(scope="function")
+def unbalanced_tree():
+    unbalanced_tree = bst.Node(10)
+    unbalanced_tree.insert(2)
+    unbalanced_tree.insert(18)
+    unbalanced_tree.insert(15)
+    return unbalanced_tree
+
+
+def test_leaf_in_built_tree(built_tree):
+    built_tree.delete(4)
+    assert built_tree.size() == 14   # was 15
+    assert not built_tree.contains(4)
+    three = built_tree.left.left
+    assert three.right is None
+
+
+def test_node_with_two_children(built_tree):
+    built_tree.delete(7)
+    assert built_tree.size() == 14
+    assert not built_tree.contains(7)
+    six = built_tree.left.right
+    assert six.left is None
+
+
+def test_node_with_one_child(built_tree):
+    built_tree.delete(7)   # from above
+    built_tree.delete(6)
+    assert built_tree.size() == 13
+    assert not built_tree.contains(6)
+    assert built_tree.left.right.value == 9  # moved into old 6 spot
+
+
+def test_value_not_in_tree(built_tree):
+    built_tree.delete(21)
+    assert built_tree.size() == 15  # unchanged
+
+
+def test_unbranched_tree(built_tree_no_branches):
+    built_tree_no_branches.delete(15)
+    assert built_tree_no_branches.size() == 10   # was 11
+    fourteen = built_tree_no_branches.right.right.right.right
+    assert fourteen.right.value == 16
+
+
+def test_unbranched_tree_leaf(built_tree_no_branches):
+    built_tree_no_branches.delete(20)
+    assert built_tree_no_branches.size() == 10   # was 11
+    child = built_tree_no_branches.right  # 11
+
+    for i in range(8):  # returns 19
+        child = child.right
+
+    assert child.right is None and child.left is None
+
+
+def test_unbalanced_tree(unbalanced_tree):
+    unbalanced_tree.delete(10)  # root
+    assert unbalanced_tree.value == 15  # new root
+    assert unbalanced_tree.balance() == 0  # new balance
+
+
+def test_small_tree(small_tree):
+    small_tree.delete(10)  # root
+    assert small_tree.value == 2   # new root
+    small_tree.delete(2)   # root
+    assert small_tree.value == 18   # new root, only node
+    assert small_tree.left is None and small_tree.right is None

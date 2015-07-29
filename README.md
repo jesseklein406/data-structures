@@ -50,3 +50,7 @@ file for the module is 'test_bst.py'. We referred to [Wikipedia](https://en.wiki
 
 ###Binary Search Tree Traversals
 Access 'bst.py' for the class Node and create a binary search tree with traversal methods. The test file for the module is 'test_bst.py'. We referred to Wikipedia [here](https://en.wikipedia.org/wiki/Binary_search_tree) and [here](https://en.wikipedia.org/wiki/Tree_traversal).
+
+
+###Binary Search Tree Delete()
+Access 'bst.py' for the class Node and create a binary search tree with a delete() method. The test file for the module is 'test_bst.py'. We referred to Wikipedia [here](https://en.wikipedia.org/wiki/Binary_search_tree).
