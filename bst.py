@@ -224,19 +224,18 @@ class Node(object):
         self = pivot
 
     def rebalance(self):
-        while self.balance() not in [-1, 0, 1]:
-            if self.balance < -1:
-                if self.right.balance <= 0:
-                    self.left_rotation()
-                else:
-                    self.right_rotation()
-                    self.left_rotation()
-            if self.balance > 1:
-                if self.left.balance >= 0:
-                    self.right_rotation()
-                else:
-                    self.left_rotation()
-                    self.right_rotation()
+        if self.balance() < -1:
+            if self.right.balance() <= 0:
+                self.left_rotation()
+            else:
+                self.right_rotation()
+                self.left_rotation()
+        if self.balance() > 1:
+            if self.left.balance() >= 0:
+                self.right_rotation()
+            else:
+                self.left_rotation()
+                self.right_rotation()
 
     def get_dot(self):
             """return the tree with root 'self' as a dot graph for visualization"""
