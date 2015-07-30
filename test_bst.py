@@ -225,3 +225,182 @@ def test_small_tree(small_tree):
     small_tree.delete(2)   # root
     assert small_tree.value == 18   # new root, only node
     assert small_tree.left is None and small_tree.right is None
+
+
+# * * * * * #
+# Rebalance #
+# * * * * * #
+
+
+@pytest.fixture(scope="function")
+def left_rot_case():
+    left_rot_case = bst.Node(2)
+    left_rot_case.insert(1)
+    left_rot_case.insert(4)
+    left_rot_case.insert(3)
+    left_rot_case.insert(5)
+
+    return left_rot_case
+
+
+@pytest.fixture(scope="function")
+def right_rot_case():
+    right_rot_case = bst.Node(4)
+    right_rot_case.insert(2)
+    right_rot_case.insert(5)
+    right_rot_case.insert(1)
+    right_rot_case.insert(3)
+
+    return right_rot_case
+
+
+@pytest.fixture(scope="function")
+def left_left_case():
+    left_left_case = bst.Node(6)
+    left_left_case.insert(4)
+    left_left_case.insert(7)
+    left_left_case.insert(2)
+    left_left_case.insert(5)
+    left_left_case.insert(1)
+    left_left_case.insert(3)
+
+    return left_left_case
+
+
+@pytest.fixture(scope="function")
+def right_right_case():
+    right_right_case = bst.Node(2)
+    right_right_case.insert(1)
+    right_right_case.insert(4)
+    right_right_case.insert(3)
+    right_right_case.insert(6)
+    right_right_case.insert(5)
+    right_right_case.insert(7)
+
+    return right_right_case
+
+
+@pytest.fixture(scope="function")
+def left_right_case():
+    left_right_case = bst.Node(6)
+    left_right_case.insert(2)
+    left_right_case.insert(7)
+    left_right_case.insert(1)
+    left_right_case.insert(4)
+    left_right_case.insert(3)
+    left_right_case.insert(5)
+
+    return left_right_case
+
+
+@pytest.fixture(scope="function")
+def right_left_case():
+    right_left_case = bst.Node(2)
+    right_left_case.insert(1)
+    right_left_case.insert(6)
+    right_left_case.insert(4)
+    right_left_case.insert(7)
+    right_left_case.insert(3)
+    right_left_case.insert(5)
+
+    return right_left_case
+
+
+def test_left_rotation(left_rot_case):
+    # 4 is pivot
+    four = left_rot_case.right
+    left_rot_case.left_rotation()
+
+    # 4 is now root
+    assert four.right.value == 5
+    assert four.left.value == 2
+    assert four.balance() == 1
+    assert four.depth() == 3
+
+
+def test_right_rotation(right_rot_case):
+    # 2 is pivot
+    two = right_rot_case.left
+    right_rot_case.right_rotation()
+
+    # 2 is now root
+    assert two.right.value == 4
+    assert two.left.value == 1
+    assert two.balance() == -1
+    assert two.depth() == 3
+
+
+def test_left_left_rebalance(left_left_case):
+    # 4 is pivot
+    four = left_left_case.left
+    left_left_case.rebalance()
+
+    # 4 is now root
+    assert four.right.value == 6
+    assert four.left.value == 2
+    assert four.balance() == 0
+    assert four.depth() == 3
+    assert four.size() == 7
+
+
+def test_right_right_rebalance(right_right_case):
+    # 4 is pivot
+    four = right_right_case.right
+    right_right_case.rebalance()
+
+    # 4 is now root
+    assert four.right.value == 6
+    assert four.left.value == 2
+    assert four.balance() == 0
+    assert four.depth() == 3
+    assert four.size() == 7
+
+
+def test_left_right_rebalance(left_right_case):
+    # 4 is pivot
+    four = left_right_case.left.right
+    left_right_case.rebalance()
+
+    # 4 is now root
+    assert four.right.value == 6
+    assert four.left.value == 2
+    assert four.balance() == 0
+    assert four.depth() == 3
+    assert four.size() == 7
+
+
+def test_right_left_rebalance(right_left_case):
+    # 4 is pivot
+    four = right_left_case.right.left
+    right_left_case.rebalance()
+
+    # 4 is now root
+    assert four.right.value == 6
+    assert four.left.value == 2
+    assert four.balance() == 0
+    assert four.depth() == 3
+    assert four.size() == 7
+
+
+def test_rebalance_unbranched(built_tree_no_branches):
+    # 15 is pivot
+    fifteen = built_tree_no_branches.right.right.right.right.right
+    built_tree_no_branches.rebalance()
+
+    # 15 is now root
+    assert fifteen.right.value == 16
+    assert fifteen.left.value == 14
+    assert fifteen.balance() == 0
+    assert fifteen.depth() == 6
+    assert fifteen.size() == 11
+
+
+def test_rebalance_balanced_tree(built_tree):
+    built_tree.rebalance()
+
+    # no change
+    assert built_tree.right.value == 15
+    assert built_tree.left.value == 5
+    assert built_tree.balance() == 0
+    assert built_tree.depth() == 4
+    assert built_tree.size() == 15
