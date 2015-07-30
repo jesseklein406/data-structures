@@ -222,23 +222,26 @@ class Node(object):
         pivot.right = self
 
     def rebalance(self):
+        """
+        Rebalance a tree whose sides differ in depth by more than one
+        """
         if self.balance() < -1:
             pivot = self.right
-            if pivot.balance() <= 0:
+            if pivot.balance() <= 0:   # right right case
                 self.left_rotation()
-                pivot.rebalance()
-            else:
+                pivot.rebalance()   # new root
+            else:                   # right left case
                 pivot_of_pivot = pivot.left
                 pivot.right_rotation()
-                self.right = pivot_of_pivot
+                self.right = pivot_of_pivot  # new root of subtree
                 self.left_rotation()
-                pivot_of_pivot.rebalance()
+                pivot_of_pivot.rebalance()   # new root
         elif self.balance() > 1:
             pivot = self.left
-            if pivot.balance() >= 0:
+            if pivot.balance() >= 0:   # left left case
                 self.right_rotation()
                 pivot.rebalance()
-            else:
+            else:                      # left right case
                 pivot_of_pivot = pivot.right
                 pivot.left_rotation()
                 self.left = pivot_of_pivot
