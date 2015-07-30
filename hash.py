@@ -7,23 +7,23 @@ class Hash(object):
         self.buckets = buckets
 
     def hash(self, key):
-        hash_key = reduce(lambda x, y: ord(x) + ord(y), key)
+        hash_key = sum([ord(c) for c in key])
         return hash_key % self.buckets
 
     def _get_bucket(self, key):
         index = self.hash(key)
-        return self.table(index)
+        return self.table[index]
 
     def _get_kvpair(self, key):
-        bucket = self.get_bucket(key)
+        bucket = self._get_bucket(key)
         for i, pair in enumerate(bucket):
             k, v = pair
-            if key == i:
+            if key == k:
                 return i, k, v
         return -1, key, _default
 
     def get(self, key):
-        i, k, v = self._get_kvpair(self.table, key)
+        i, k, v = self._get_kvpair(key)
         if v is _default:
             raise KeyError('Key does not exist')
         return v
@@ -31,8 +31,8 @@ class Hash(object):
     def set(self, key, value):
         if type(key) is not str:
             raise TypeError('Key must be string!')
-        bucket = self._get_bucket(self.table, key)
-        i, k, v = self._get_kvpair(self.table, key)
+        bucket = self._get_bucket(key)
+        i, k, v = self._get_kvpair(key)
         if i >= 0:
             bucket[i] = key, value
         else:
