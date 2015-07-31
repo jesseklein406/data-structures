@@ -58,3 +58,7 @@ Access 'bst.py' for the class Node and create a binary search tree with a delete
 
 ###Binary Search Tree Rebalance()
 Access 'bst.py' for the class Node and create a binary search tree with a rebalance() method. The test file for the module is 'test_bst.py'. We referred to Wikipedia [here](https://en.wikipedia.org/wiki/Tree_rotation) for tree rotation and used their conventions for test cases.
+
+
+###Hash Table
+Access 'hash.py' for the class Hash and create a hash table. The test file for the module is 'test_hash.py'. The hashing algorithm used was the sum of character ord() values mod number of buckets. We referred to *Learn Python the Hard Way* [here](http://learnpythonthehardway.org/book/ex39.html).
