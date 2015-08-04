@@ -5,6 +5,10 @@ from __future__ import unicode_literals
 
 
 def merge_sort(lst):
+    """
+    Sort a list of values using merge sort.
+    Return the sorted version of the list
+    """
     if len(lst) <= 1:
         return lst
 
@@ -19,10 +23,13 @@ def merge_sort(lst):
 
 
 def merge(left, right):
+    """
+    Helper function for merge sort. Merges two pre-sorted lists of values
+    """
     sort = []
     l_index = 0
     r_index = 0
-    while l_index < len(left) and r_index() < len(right):
+    while l_index < len(left) and r_index < len(right):
         if left[l_index] <= right[r_index]:
             sort.append(left[l_index])
             l_index += 1
@@ -145,7 +152,10 @@ if __name__ == '__main__':
         'from __main__ import merge_sort, worst_case'
     ).timeit(10) / 10
 
-    print "These tests approximately model O(n) behavior for best case"
-    print "and O(n2) behavior for worst case, so insertion sort works well"
-    print "for all sets that are reasonably sorted, or small sets that are"
-    print "not very sorted, and not very well for large poorly sorted data"
+    print "These tests approximately model O(n log(n)) behavior for all cases"
+    print "so the merge sort is unbiased of how well sorted any inputs are prior"
+    print "to a merge sort. The merge sort is ideal for large, poorly sorted data"
+    print "sets, as compared to insertion sort which is O(n2) in worst cases."
+    print "However merge sorts are more expensive with space as compared to"
+    print "other algorithms, according to Wikipedia"
+    print "https://en.wikipedia.org/wiki/Merge_sort"

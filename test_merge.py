@@ -39,30 +39,25 @@ def big():
 
 
 def test_unsorted(unsorted):
-    merge_sort(unsorted)
-    assert unsorted == [-3, 1, 2, 3, 4, 5, 5.5, 6, 7, 8, 9, 10]
+    sort = merge_sort(unsorted)
+    assert sort == [-3, 1, 2, 3, 4, 5, 5.5, 6, 7, 8, 9, 10]
 
 
 def test_binary(binary):
-    merge_sort(binary)
-    assert binary == [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1]
+    sort = merge_sort(binary)
+    assert sort == [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1]
 
 
 def test_one(one):
-    merge_sort(one)
-    assert one == [5]
+    sort = merge_sort(one)
+    assert sort == [5]
 
 
 def test_empty(empty):
-    merge_sort(empty)
-    assert empty == []
+    sort = merge_sort(empty)
+    assert sort == []
 
 
 def test_big(big):
-    merge_sort(big)
-    assert big == range(10000)
-
-
-def test_immutable():
-    with pytest.raises(TypeError):
-        merge_sort("nope")
+    sort = merge_sort(big)
+    assert sort == range(10000)
