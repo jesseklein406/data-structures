@@ -62,3 +62,7 @@ Access 'bst.py' for the class Node and create a binary search tree with a rebala
 
 ###Hash Table
 Access 'hash.py' for the class Hash and create a hash table. The test file for the module is 'test_hash.py'. The hashing algorithm used was the sum of character ord() values mod number of buckets. We referred to *Learn Python the Hard Way* [here](http://learnpythonthehardway.org/book/ex39.html).
+
+
+###Insertion Sort
+Access 'insertion.py' for the function insertion_sort() to sort a list in place. The test file for the module is 'test_insertion.py'. We referred to *Interactive Python* [here](http://interactivepython.org/runestone/static/pythonds/SortSearch/TheInsertionSort.html).
