@@ -66,3 +66,8 @@ Access 'hash.py' for the class Hash and create a hash table. The test file for t
 
 ###Insertion Sort
 Access 'insertion.py' for the function insertion_sort() to sort a list in place. The test file for the module is 'test_insertion.py'. We referred to *Interactive Python* [here](http://interactivepython.org/runestone/static/pythonds/SortSearch/TheInsertionSort.html).
+
+
+###Merge Sort
+Access 'merge.py' for the function merge_sort() to sort a list using merge sort
+and return its sorted version. The test file for the module is 'test_merge.py'. We referred to codereading.com [here](http://www.codereading.com/algo_and_ds/algo/merge_sort.html) and Wikipedia [here](https://en.wikipedia.org/wiki/Merge_sort).
