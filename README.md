@@ -71,3 +71,8 @@ Access 'insertion.py' for the function insertion_sort() to sort a list in place.
 ###Merge Sort
 Access 'merge.py' for the function merge_sort() to sort a list using merge sort
 and return its sorted version. The test file for the module is 'test_merge.py'. We referred to codereading.com [here](http://www.codereading.com/algo_and_ds/algo/merge_sort.html) and Wikipedia [here](https://en.wikipedia.org/wiki/Merge_sort).
+
+
+###Quick Sort
+Access 'quick.py' for the function quick() to sort a list using quick sort
+and return its sorted version. The test file for the module is 'test_quick.py'. We referred to codereading.com [here](http://www.codereading.com/algo_and_ds/algo/quick_sort.html), Wikipedia [here](https://en.wikipedia.org/wiki/Quicksort), and PythonScriptHQ [here](http://pfsensesetup.com/pythonscript.net/quicksort-a-python-implementation/).
