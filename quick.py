@@ -5,6 +5,9 @@ from __future__ import unicode_literals
 
 
 def quick(lst):
+    """
+    Return a sorted list from an input list using a quicksort algorithm
+    """
     if len(lst) < 1:
         return lst
 
@@ -120,9 +123,10 @@ if __name__ == '__main__':
     ).timeit(10) / 10
 
     print
-    print "Time for all ones case of list of first 997 integers"
+    print "Time for all ones case of list of first 996 integers"
+    print "This is the max for the ones case before hitting recursion limit"
     print Timer(
-        'quick(ones(997))',
+        'quick(ones(996))',
         'from __main__ import quick, ones'
     ).timeit(10) / 10
 
@@ -147,13 +151,6 @@ if __name__ == '__main__':
         'from __main__ import quick, reverse_case'
     ).timeit(10) / 10
 
-    # print
-    # print "Time for all ones case of list of first 2000 integers"
-    # print Timer(
-    #     'quick(ones(2000))',
-    #     'from __main__ import quick, ones'
-    # ).timeit(10) / 10
-
     print
     print "Time for shuffled case of list of first 2000 integers"
     print Timer(
@@ -161,12 +158,12 @@ if __name__ == '__main__':
         'from __main__ import quick, shuffled_case'
     ).timeit(10) / 10
 
-    # print
-    # print "Time for best case of list of first 3000 integers"
-    # print Timer(
-    #     'quick(best_case(3000))',
-    #     'from __main__ import quick, best_case'
-    # ).timeit(10) / 10
+    print
+    print "Time for best case of list of first 3000 integers"
+    print Timer(
+        'quick(best_case(3000))',
+        'from __main__ import quick, best_case'
+    ).timeit(10) / 10
 
     print
     print "Time for reverse case of list of first 3000 integers"
@@ -175,13 +172,6 @@ if __name__ == '__main__':
         'from __main__ import quick, reverse_case'
     ).timeit(10) / 10
 
-    # print
-    # print "Time for all ones case of list of first 3000 integers"
-    # print Timer(
-    #     'quick(ones(3000))',
-    #     'from __main__ import quick, ones'
-    # ).timeit(10) / 10
-
     print
     print "Time for shuffled case of list of first 3000 integers"
     print Timer(
@@ -189,12 +179,12 @@ if __name__ == '__main__':
         'from __main__ import quick, shuffled_case'
     ).timeit(10) / 10
 
-    # print
-    # print "Time for best case of list of first 4000 integers"
-    # print Timer(
-    #     'quick(best_case(4000))',
-    #     'from __main__ import quick, best_case'
-    # ).timeit(10) / 10
+    print
+    print "Time for best case of list of first 4000 integers"
+    print Timer(
+        'quick(best_case(4000))',
+        'from __main__ import quick, best_case'
+    ).timeit(10) / 10
 
     print
     print "Time for reverse case of list of first 4000 integers"
@@ -203,13 +193,6 @@ if __name__ == '__main__':
         'from __main__ import quick, reverse_case'
     ).timeit(10) / 10
 
-    # print
-    # print "Time for all ones case of list of first 4000 integers"
-    # print Timer(
-    #     'quick(ones(4000))',
-    #     'from __main__ import quick, ones'
-    # ).timeit(10) / 10
-
     print
     print "Time for shuffled case of list of first 4000 integers"
     print Timer(
@@ -217,12 +200,12 @@ if __name__ == '__main__':
         'from __main__ import quick, shuffled_case'
     ).timeit(10) / 10
 
-    # print
-    # print "Time for best case of list of first 5000 integers"
-    # print Timer(
-    #     'quick(best_case(5000))',
-    #     'from __main__ import quick, best_case'
-    # ).timeit(10) / 10
+    print
+    print "Time for best case of list of first 5000 integers"
+    print Timer(
+        'quick(best_case(5000))',
+        'from __main__ import quick, best_case'
+    ).timeit(10) / 10
 
     print
     print "Time for reverse case of list of first 5000 integers"
@@ -231,16 +214,17 @@ if __name__ == '__main__':
         'from __main__ import quick, reverse_case'
     ).timeit(10) / 10
 
-    # print
-    # print "Time for all ones case of list of first 5000 integers"
-    # print Timer(
-    #     'quick(ones(5000))',
-    #     'from __main__ import quick, ones'
-    # ).timeit(10) / 10
-
     print
     print "Time for shuffled case of list of first 5000 integers"
     print Timer(
         'quick(shuffled_case(5000))',
         'from __main__ import quick, shuffled_case'
     ).timeit(10) / 10
+
+    print "Tese test cases show similar behavior for sorted, reverse sorted,"
+    print "and shuffled data sets. However, the case for all equal values"
+    print "performs poorly. Possibly because it has no efficient way of"
+    print "finding a good pivot. The other cases show behavior similar to"
+    print "O(n log(n)) time complexity with times clocking about the same"
+    print "as the merge sort tests. As with that algorithm, the quick sort does"
+    print "not perform as well as insertion sort with small list sizes."
