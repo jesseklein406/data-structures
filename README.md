@@ -76,3 +76,7 @@ and return its sorted version. The test file for the module is 'test_merge.py'. 
 ###Quick Sort
 Access 'quick.py' for the function quick() to sort a list using quick sort
 and return its sorted version. The test file for the module is 'test_quick.py'. We referred to codereading.com [here](http://www.codereading.com/algo_and_ds/algo/quick_sort.html), Wikipedia [here](https://en.wikipedia.org/wiki/Quicksort), and PythonScriptHQ [here](http://pfsensesetup.com/pythonscript.net/quicksort-a-python-implementation/).
+
+
+###Radix Sort
+Access 'radix.py' for the function radix_integer() to sort a list of integers using radix sort and return its sorted version. Also, use radix_string to sort a list of strings. The test file for the module is 'test_radix.py'. We referred to Wikipedia [here](https://en.wikipedia.org/wiki/Quicksort), and Edward Park [here](https://github.com/edpark13/data_structure2/blob/radixsort/radixsort.py).
