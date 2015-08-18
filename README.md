@@ -35,3 +35,8 @@ the previous binary heap assignment.
 Access 'simple_graph.py' for the class G and create a graph object to hold data.
 The test file for the module is 'test_simple_graph.py'. This assignment heavily uses code from
 the previous binary heap assignment. Thanks to Martin Broadhurst for a great resource. http://www.martinbroadhurst.com/graph-data-structures.html
+
+
+###Graph Traversal Assignment
+Access 'simple_graph.py' for traversal methods for the class G.
+The test file for the module is 'test_graph_traversal.py'. I referred to [Wikipedia](https://en.wikipedia.org/wiki/Graph_traversal) for this assignment.
