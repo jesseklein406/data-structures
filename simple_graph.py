@@ -4,6 +4,8 @@
 http://www.martinbroadhurst.com/graph-data-structures.html
 """
 
+from Queue import Queue
+
 
 class Node(object):
     """A Node class for use in a simple graph"""
@@ -93,3 +95,30 @@ class G(tuple):
                 return True
 
         return False
+
+    def depth_first_traversal(self, start, discovered=[]):
+        """Perform a full depth-first traversal of the graph beginning at
+        start. Return the full visited path when traversal is complete.
+        """
+        discovered.append(start)
+        for neighbor in self.neighbors(start):
+            if neighbor not in discovered:
+                self.depth_first_traversal(neighbor, discovered=discovered)
+        return discovered
+
+    def breadth_first_traversal(self, start):
+        """Perform a full breadth-first traversal of the graph, beginning at
+        start. Return the full visited path when traversal is complete.
+        """
+        result = []
+        q = Queue()
+        q.put(start)
+
+        while q.full():
+            n = q.get()
+            for neighbor in self.neighbors(n):
+                if neighbor not in result:
+                    result.append(neighbor)
+                    q.put(neighbor)
+
+        return result

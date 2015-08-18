@@ -3,7 +3,7 @@
 """Test for graph traversal"""
 
 from __future__ import unicode_literals
-import graph_traversal as gt
+import simple_graph as gt
 import pytest
 
 
@@ -116,65 +116,6 @@ def long_graph(node_list):
 
 
 @pytest.fixture(scope="function")
-def huge_graph(node_list):
-    """
-    1  -  2 -  3 -  4 -  5 -  6 -  7 -  8 -  9 - 10
-    |
-    11 - 12 - 13 - 14 - 15 - 16 - 17 - 18 - 19 - 20
-    |
-    21 - 22 - 23 - 24 - 25 - 26 - 27 - 28 - 29 - 30
-    |
-    31 - 32 - 33 - 34 - 35 - 36 - 37 - 38 - 39 - 40
-    |
-    41 - 42 - 43 - 44 - 45 - 46 - 47 - 48 - 49 - 50
-    |
-    51 - 52 - 53 - 54 - 55 - 56 - 57 - 58 - 59 - 60
-    |
-    61 - 62 - 63 - 64 - 65 - 66 - 67 - 68 - 69 - 70
-    |
-    71 - 72 - 73 - 74 - 75 - 76 - 77 - 78 - 79 - 80
-    |
-    81 - 82 - 83 - 84 - 85 - 86 - 87 - 88 - 89 - 90
-    |
-    91 - 92 - 93 - 94 - 95 - 96 - 97 - 98 - 99 - 100
-    """
-
-    huge_graph = gt.G()
-
-    for i in range(9):
-        i = 10 * i + 1
-        huge_graph.add_edge(node_list[i], node_list[i + 10])
-
-    for i in range(10):
-        i = 10 * i
-        for j in range(1, 10):
-            huge_graph.add_edge(node_list[i + j], node_list[i + j + 1])
-
-    return huge_graph
-
-
-@pytest.fixture(scope="function")
-def small_graph(node_list):
-    """
-        1
-       / \
-      2   3
-     / \   \
-    4   5   6
-    """
-
-    small_graph = gt.G()
-
-    small_graph.add_edge(node_list[1], node_list[2])
-    small_graph.add_edge(node_list[1], node_list[3])
-    small_graph.add_edge(node_list[2], node_list[4])
-    small_graph.add_edge(node_list[2], node_list[5])
-    small_graph.add_edge(node_list[3], node_list[6])
-
-    return small_graph
-
-
-@pytest.fixture(scope="function")
 def cyclic_graph(node_list):
     """
     1  -  2 -  3 -  4
@@ -234,27 +175,40 @@ def test_dft_on_long_at_root(long_graph):
     actual = long_graph.depth_first_traversal(start)
 
     actual_values = [i.value for i in actual]
-    
+
+    traverse_up = []
+    end = actual_values.pop()
+    while end != 18:
+        traverse_up.append(end)
+        end = actual_values.pop()
+
+    assert actual_values == sorted(actual_values)
+    assert traverse_up == sorted(traverse_up)
 
 
 def test_dft_on_long_at_middle(long_graph):
-    pass
+    start = node_list[8]
+    actual = long_graph.depth_first_traversal(start)
 
+    actual_values = [i.value for i in actual]
 
-def test_dft_on_huge_at_root(huge_graph):
-    pass
+    traverse_up = []
+    end = actual_values.pop()
+    while end != 18:
+        traverse_up.append(end)
+        end = actual_values.pop()
 
-
-def test_dft_on_huge_at_middle(huge_graph):
-    pass
-
-
-def test_dft_on_small(small_graph):
-    pass
+    assert actual_values == sorted(actual_values)
+    assert traverse_up == sorted(traverse_up)
 
 
 def test_dft_on_cyclic(cyclic_graph):
-    pass
+    start = node_list[1]
+    actual = cyclic_graph.depth_first_traversal(start)
+
+    actual_values = [i.value for i in actual]
+
+    assert actual_values == range(1, 11)
 
 
 # g.breadth_first_traversal(start): Perform a full breadth-first traversal of
@@ -262,32 +216,74 @@ def test_dft_on_cyclic(cyclic_graph):
 # complete.
 
 def test_bft_on_wide_at_root(wide_graph):
-    pass
+    start = node_list[1]
+    actual = wide_graph.breadth_first_traversal(start)
+
+    for node in enumerate(actual):
+        for item in wide_graph_map.iteritems():
+            if node[1] in item[1]:
+                actual[node[0]] = item[0]
+
+    expected = [
+        1, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4,
+        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4
+    ]
+
+    assert expected == actual
 
 
 def test_bft_on_wide_at_middle(wide_graph):
-    pass
+    start = node_list[2]
+    actual = wide_graph.breadth_first_traversal(start)
+
+    for node in enumerate(actual):
+        for item in wide_graph_map.iteritems():
+            if node[1] in item[1]:
+                actual[node[0]] = item[0]
+
+    expected = [2, 3, 3, 4, 4, 4, 4]
+
+    assert expected == actual
 
 
 def test_bft_on_long_at_root(long_graph):
-    pass
+    start = node_list[1]
+    actual = long_graph.breadth_first_traversal(start)
+
+    actual_values = [i.value for i in actual]
+
+    odds = []
+    evens = []
+    while actual_values:
+        odds.append(actual_values.pop(0))
+        if actual_values:
+            evens.append(actual_values.pop(0))
+
+    assert odds == sorted(odds)
+    assert evens == sorted(evens)
 
 
 def test_bft_on_long_at_middle(long_graph):
-    pass
+    start = node_list[8]
+    actual = long_graph.breadth_first_traversal(start)
 
+    actual_values = [i.value for i in actual]
 
-def test_bft_on_huge_at_root(huge_graph):
-    pass
+    odds = []
+    evens = []
+    while actual_values:
+        odds.append(actual_values.pop(0))
+        if actual_values:
+            evens.append(actual_values.pop(0))
 
-
-def test_bft_on_huge_at_middle(huge_graph):
-    pass
-
-
-def test_bft_on_small(small_graph):
-    pass
+    assert odds == sorted(odds)
+    assert evens == sorted(evens)
 
 
 def test_bft_on_cyclic(cyclic_graph):
-    pass
+    start = node_list[1]
+    actual = cyclic_graph.breadth_first_traversal(start)
+
+    actual_values = [i.value for i in actual]
+
+    assert actual_values == range(1, 11)
