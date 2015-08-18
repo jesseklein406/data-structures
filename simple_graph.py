@@ -126,3 +126,127 @@ class G(tuple):
                     q.put(neighbor)
 
         return result
+
+
+if __name__ == '__main__':
+    from timeit import Timer
+
+    def node_list_maker():
+        node_list = []
+        for i in range(101):
+            new_node = Node(str(i), i)
+            node_list.append(new_node)
+
+        return node_list
+
+    node_list = node_list_maker()
+
+    def wide_graph():
+        """
+                  1
+               /  |  \
+            2     3   4
+           /|    /|   |\
+          5 6   7 8   9 1O
+         /| |\ /| |\ /| |\
+        11................22
+        """
+
+        wide_graph = G()
+
+        wide_graph.add_edge(node_list[1], node_list[2])
+        wide_graph.add_edge(node_list[1], node_list[3])
+        wide_graph.add_edge(node_list[1], node_list[4])
+        wide_graph.add_edge(node_list[2], node_list[5])
+        wide_graph.add_edge(node_list[2], node_list[6])
+        wide_graph.add_edge(node_list[3], node_list[7])
+        wide_graph.add_edge(node_list[3], node_list[8])
+        wide_graph.add_edge(node_list[4], node_list[9])
+        wide_graph.add_edge(node_list[4], node_list[10])
+        wide_graph.add_edge(node_list[5], node_list[11])
+        wide_graph.add_edge(node_list[5], node_list[12])
+        wide_graph.add_edge(node_list[6], node_list[13])
+        wide_graph.add_edge(node_list[6], node_list[14])
+        wide_graph.add_edge(node_list[7], node_list[15])
+        wide_graph.add_edge(node_list[7], node_list[16])
+        wide_graph.add_edge(node_list[8], node_list[17])
+        wide_graph.add_edge(node_list[8], node_list[18])
+        wide_graph.add_edge(node_list[9], node_list[19])
+        wide_graph.add_edge(node_list[9], node_list[20])
+        wide_graph.add_edge(node_list[10], node_list[21])
+        wide_graph.add_edge(node_list[10], node_list[22])
+
+        return wide_graph
+
+    def long_graph():
+        """
+           1
+           |
+           2
+          /|
+         3 4
+          /|
+         5 6
+          /|
+         7 8
+          /|
+         9 10
+          /|
+        11 12
+          /|
+        13 14
+          /|
+        15 16
+          /|
+        17 18
+        """
+
+        long_graph = G()
+
+        long_graph.add_edge(node_list[1], node_list[2])
+        long_graph.add_edge(node_list[2], node_list[3])
+        long_graph.add_edge(node_list[2], node_list[4])
+        long_graph.add_edge(node_list[4], node_list[5])
+        long_graph.add_edge(node_list[4], node_list[6])
+        long_graph.add_edge(node_list[6], node_list[7])
+        long_graph.add_edge(node_list[6], node_list[8])
+        long_graph.add_edge(node_list[8], node_list[8])
+        long_graph.add_edge(node_list[8], node_list[10])
+        long_graph.add_edge(node_list[10], node_list[11])
+        long_graph.add_edge(node_list[10], node_list[12])
+        long_graph.add_edge(node_list[12], node_list[13])
+        long_graph.add_edge(node_list[12], node_list[14])
+        long_graph.add_edge(node_list[14], node_list[15])
+        long_graph.add_edge(node_list[14], node_list[16])
+        long_graph.add_edge(node_list[16], node_list[17])
+        long_graph.add_edge(node_list[16], node_list[18])
+
+        return long_graph
+
+    print "\nTime for dft of wide_graph"
+    print Timer(
+        'wide_graph().depth_first_traversal(node_list[1])',
+        'from __main__ import G, wide_graph, node_list'
+    ).timeit(10) / 10
+
+    print "\nTime for dft of long_graph"
+    print Timer(
+        'long_graph().depth_first_traversal(node_list[1])',
+        'from __main__ import G, long_graph, node_list'
+    ).timeit(10) / 10
+
+    print "\nTime for bft of wide_graph"
+    print Timer(
+        'wide_graph().breadth_first_traversal(node_list[1])',
+        'from __main__ import G, wide_graph, node_list'
+    ).timeit(10) / 10
+
+    print "\nTime for bft of long_graph"
+    print Timer(
+        'long_graph().breadth_first_traversal(node_list[1])',
+        'from __main__ import G, long_graph, node_list'
+    ).timeit(10) / 10
+
+    print "\nThe dft seems to perform about three times faster than the bft"
+    print "for both wide or deep graph. In general the wide and deep graphs"
+    print "behave similarly relative to their size."
