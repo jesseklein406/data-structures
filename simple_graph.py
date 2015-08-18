@@ -96,10 +96,13 @@ class G(tuple):
 
         return False
 
-    def depth_first_traversal(self, start, discovered=[]):
+    def depth_first_traversal(self, start, discovered=None):
         """Perform a full depth-first traversal of the graph beginning at
         start. Return the full visited path when traversal is complete.
         """
+        if discovered is None:
+            discovered = []
+
         discovered.append(start)
         for neighbor in self.neighbors(start):
             if neighbor not in discovered:
@@ -112,13 +115,14 @@ class G(tuple):
         """
         result = []
         q = Queue()
+
         q.put(start)
 
-        while q.full():
+        while not q.empty():
             n = q.get()
+            result.append(n)
             for neighbor in self.neighbors(n):
                 if neighbor not in result:
-                    result.append(neighbor)
                     q.put(neighbor)
 
         return result

@@ -7,7 +7,7 @@ import simple_graph as gt
 import pytest
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def node_list():
     node_list = []
     for i in range(101):
@@ -56,7 +56,7 @@ def wide_graph(node_list):
     return wide_graph
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def wide_graph_map(node_list):
     wide_graph_map = {
         1: [node_list[1]],
@@ -139,42 +139,42 @@ def cyclic_graph(node_list):
 # graph beginning at start. Return the full visited path when traversal is
 # complete.
 
-def test_dft_on_wide_at_root(wide_graph, node_list, wide_graph_map):
+def test_dft_on_wide_at_root(node_list, wide_graph, wide_graph_map):
     start = node_list[1]
-    actual = wide_graph.depth_first_traversal(start)
+    actualdwr = wide_graph.depth_first_traversal(start)
 
-    for node in enumerate(actual):
+    for node in enumerate(actualdwr):
         for item in wide_graph_map.iteritems():
             if node[1] in item[1]:
-                actual[node[0]] = item[0]
+                actualdwr[node[0]] = item[0]
 
     expected = [
         1, 2, 3, 4, 4, 3, 4, 4, 2, 3, 4,
         4, 3, 4, 4, 2, 3, 4, 4, 3, 4, 4
     ]
 
-    assert expected == actual
+    assert expected == actualdwr
 
 
-def test_dft_on_wide_at_middle(wide_graph):
+def test_dft_on_wide_at_middle(node_list, wide_graph, wide_graph_map):
     start = node_list[2]
-    actual = wide_graph.depth_first_traversal(start)
+    actualdwm = wide_graph.depth_first_traversal(start)
 
-    for node in enumerate(actual):
+    for node in enumerate(actualdwm):
         for item in wide_graph_map.iteritems():
             if node[1] in item[1]:
-                actual[node[0]] = item[0]
+                actualdwm[node[0]] = item[0]
 
     expected = [2, 3, 4, 4, 3, 4, 4]
 
-    assert expected == actual
+    assert expected == actualdwm
 
 
-def test_dft_on_long_at_root(long_graph):
+def test_dft_on_long_at_root(node_list, long_graph):
     start = node_list[1]
-    actual = long_graph.depth_first_traversal(start)
+    actualdlr = long_graph.depth_first_traversal(start)
 
-    actual_values = [i.value for i in actual]
+    actual_values = [i.value for i in actualdlr]
 
     traverse_up = []
     end = actual_values.pop()
@@ -186,11 +186,11 @@ def test_dft_on_long_at_root(long_graph):
     assert traverse_up == sorted(traverse_up)
 
 
-def test_dft_on_long_at_middle(long_graph):
+def test_dft_on_long_at_middle(node_list, long_graph):
     start = node_list[8]
-    actual = long_graph.depth_first_traversal(start)
+    actualdlm = long_graph.depth_first_traversal(start)
 
-    actual_values = [i.value for i in actual]
+    actual_values = [i.value for i in actualdlm]
 
     traverse_up = []
     end = actual_values.pop()
@@ -202,11 +202,11 @@ def test_dft_on_long_at_middle(long_graph):
     assert traverse_up == sorted(traverse_up)
 
 
-def test_dft_on_cyclic(cyclic_graph):
+def test_dft_on_cyclic(node_list, cyclic_graph):
     start = node_list[1]
-    actual = cyclic_graph.depth_first_traversal(start)
+    actualdc = cyclic_graph.depth_first_traversal(start)
 
-    actual_values = [i.value for i in actual]
+    actual_values = [i.value for i in actualdc]
 
     assert actual_values == range(1, 11)
 
@@ -215,42 +215,42 @@ def test_dft_on_cyclic(cyclic_graph):
 # the graph, beginning at start. Return the full visited path when traversal is
 # complete.
 
-def test_bft_on_wide_at_root(wide_graph):
+def test_bft_on_wide_at_root(node_list, wide_graph, wide_graph_map):
     start = node_list[1]
-    actual = wide_graph.breadth_first_traversal(start)
+    actualbwr = wide_graph.breadth_first_traversal(start)
 
-    for node in enumerate(actual):
+    for node in enumerate(actualbwr):
         for item in wide_graph_map.iteritems():
             if node[1] in item[1]:
-                actual[node[0]] = item[0]
+                actualbwr[node[0]] = item[0]
 
     expected = [
         1, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4,
         4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4
     ]
 
-    assert expected == actual
+    assert expected == actualbwr
 
 
-def test_bft_on_wide_at_middle(wide_graph):
+def test_bft_on_wide_at_middle(node_list, wide_graph, wide_graph_map):
     start = node_list[2]
-    actual = wide_graph.breadth_first_traversal(start)
+    actualbwm = wide_graph.breadth_first_traversal(start)
 
-    for node in enumerate(actual):
+    for node in enumerate(actualbwm):
         for item in wide_graph_map.iteritems():
             if node[1] in item[1]:
-                actual[node[0]] = item[0]
+                actualbwm[node[0]] = item[0]
 
     expected = [2, 3, 3, 4, 4, 4, 4]
 
-    assert expected == actual
+    assert expected == actualbwm
 
 
-def test_bft_on_long_at_root(long_graph):
+def test_bft_on_long_at_root(node_list, long_graph):
     start = node_list[1]
-    actual = long_graph.breadth_first_traversal(start)
+    actualblr = long_graph.breadth_first_traversal(start)
 
-    actual_values = [i.value for i in actual]
+    actual_values = [i.value for i in actualblr]
 
     odds = []
     evens = []
@@ -263,11 +263,11 @@ def test_bft_on_long_at_root(long_graph):
     assert evens == sorted(evens)
 
 
-def test_bft_on_long_at_middle(long_graph):
+def test_bft_on_long_at_middle(node_list, long_graph):
     start = node_list[8]
-    actual = long_graph.breadth_first_traversal(start)
+    actualblm = long_graph.breadth_first_traversal(start)
 
-    actual_values = [i.value for i in actual]
+    actual_values = [i.value for i in actualblm]
 
     odds = []
     evens = []
@@ -280,10 +280,10 @@ def test_bft_on_long_at_middle(long_graph):
     assert evens == sorted(evens)
 
 
-def test_bft_on_cyclic(cyclic_graph):
+def test_bft_on_cyclic(node_list, cyclic_graph):
     start = node_list[1]
-    actual = cyclic_graph.breadth_first_traversal(start)
+    actualbc = cyclic_graph.breadth_first_traversal(start)
 
-    actual_values = [i.value for i in actual]
+    actual_values = [i.value for i in actualbc]
 
     assert actual_values == range(1, 11)
