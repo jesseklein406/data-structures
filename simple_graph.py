@@ -13,6 +13,7 @@ class Node(object):
         """Make a new node object"""
         self.name = name
         self.value = value
+        self.edges = {}
 
 
 class G(tuple):
@@ -37,10 +38,12 @@ class G(tuple):
         """adds a new node 'n' to the graph"""
         self.nodes_.add(n)
 
-    def add_edge(self, n1, n2):
+    def add_edge(self, n1, n2, weight):
         """adds a new edge to the graph connecting 'n1' and 'n2', if either n1
         or n2 are not already present in the graph, they should be added.
         """
+        weight = int(weight)
+
         if n1 not in self.nodes_:
             self.nodes_.add(n1)
 
@@ -48,6 +51,7 @@ class G(tuple):
             self.nodes_.add(n2)
 
         self.edges_.add((n1, n2))
+        n1.edges[n2] = weight
 
     def del_node(self, n):
         """deletes the node 'n' from the graph, raises an error if no such node exists
@@ -63,6 +67,7 @@ class G(tuple):
         error if no such edge exists
         """
         self.edges_.remove((n1, n2))
+        del n1.edges[n2]
 
     def has_node(self, n):
         """True if node 'n' is contained in the graph, False if not.
@@ -126,6 +131,12 @@ class G(tuple):
                     q.put(neighbor)
 
         return result
+
+    def __getitem__(self, item):
+        if item not in self.nodes_:
+            raise IndexError("Node not in graph")
+
+        return item.edges
 
 
 if __name__ == '__main__':
