@@ -50,7 +50,7 @@ The test file for the module is 'test_weighted_edges.py'.
 
 ###Graph Algorithms for Shortest Path Assignment
 Access 'simple_graph.py' for shortest path algorithms for the class G.
-The test file for the module is 'test_graph_traversal.py'.
+The test file for the module is 'test_shortest_path.py'.
 
 The two algorithms I chose were Dijkstra's and Bellman-Ford's. 
 I referred to [Wikipedia](https://en.wikipedia.org/wiki/Shortest_path_problem) for this assignment. Specifically, I implemented the methods used in the pseudocode for my two algorithms from the articles for the algorithms [here](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm) and [here](https://en.wikipedia.org/wiki/Bellman–Ford_algorithm).
