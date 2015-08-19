@@ -47,3 +47,12 @@ The test file for the module is 'test_graph_traversal.py'. I referred to [Wikipe
 ###Graph with Weighted Edges Assignment
 Access 'simple_graph.py' to implement weighted edges for the class G and Node class.
 The test file for the module is 'test_weighted_edges.py'.
+
+###Graph Algorithms for Shortest Path Assignment
+Access 'simple_graph.py' for shortest path algorithms for the class G.
+The test file for the module is 'test_graph_traversal.py'.
+
+The two algorithms I chose were Dijkstra's and Bellman-Ford's. 
+I referred to [Wikipedia](https://en.wikipedia.org/wiki/Shortest_path_problem) for this assignment. Specifically, I implemented the methods used in the pseudocode for my two algorithms from the articles for the algorithms [here](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm) and [here](https://en.wikipedia.org/wiki/Bellman–Ford_algorithm).
+
+Dijkstra's algorithm will always find the shortest path with as few iterations as possible because it cherry picks the least weighted path to execute on first. Thus the path may continue to retain priority if its total weight keeps undercutting other paths. Bellman-Ford's can execute on negative weights as well as check for runaway de-weighting. Beyond those special casesm Dijkstra's is optimal.
