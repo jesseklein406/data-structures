@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jesseklein406/data-structures.svg?branch=bst2)](https://travis-ci.org/jesseklein406/data-structures)
+
 #Data Structures Assignments
 ####Jesse Klein & Muoi Ly
 
@@ -40,3 +42,8 @@ the previous binary heap assignment. Thanks to Martin Broadhurst for a great res
 ###Graph Traversal Assignment
 Access 'simple_graph.py' for traversal methods for the class G.
 The test file for the module is 'test_graph_traversal.py'. I referred to [Wikipedia](https://en.wikipedia.org/wiki/Graph_traversal) for this assignment.
+
+
+###Graph with Weighted Edges Assignment
+Access 'simple_graph.py' to implement weighted edges for the class G and Node class.
+The test file for the module is 'test_weighted_edges.py'.
