@@ -4,7 +4,7 @@
 http://www.martinbroadhurst.com/graph-data-structures.html
 """
 
-from Queue import Queue
+from collections import deque
 
 
 class Node(object):
@@ -119,16 +119,16 @@ class G(tuple):
         start. Return the full visited path when traversal is complete.
         """
         result = []
-        q = Queue()
+        dq = deque()
 
-        q.put(start)
+        dq.append(start)
 
-        while not q.empty():
-            n = q.get()
-            result.append(n)
-            for neighbor in self.neighbors(n):
+        while dq:
+            next = dq.pop()
+            result.append(next)
+            for neighbor in self.neighbors(next):
                 if neighbor not in result:
-                    q.put(neighbor)
+                    dq.append(neighbor)
 
         return result
 
@@ -137,3 +137,61 @@ class G(tuple):
             raise KeyError("Node not in graph")
 
         return item.edges
+
+    def dijkstra(self, source):
+
+        dist = {}
+        prev = {}
+
+        dist[source] = 0
+        prev[source] = None
+
+        dq = deque()
+
+        for node in self.nodes_:
+            if node != source:
+                dist[node] = float('Inf')
+                prev[node] = None
+            dq.append(node)
+
+        while dq:
+
+            sorted_dq = sorted(dq, key=dist.__getitem__)
+            min_dist = sorted_dq[0]
+            dq.remove(min_dist)
+
+            for neighbor in self.neighbors(min_dist):
+                alt = dist[min_dist] + self[min_dist][neighbor]
+                if alt < dist[neighbor]:
+                    dist[neighbor] = alt
+                    prev[neighbor] = min_dist
+
+        return dist, prev
+
+    def bellman_ford(self, source):
+
+        dist = {}
+        prev = {}
+
+        dist[source] = 0
+        prev[source] = None
+
+        for node in self.nodes_:
+            if node == source:
+                dist[node] = 0
+            else:
+                dist[node] = float('Inf')
+
+            prev[node] = None
+
+        for i in range(1, len(self.nodes_)):
+            for edge in self.edges_:
+                if dist[edge[0]] + self[edge[0]][edge[1]] < dist[edge[1]]:
+                    dist[edge[1]] = dist[edge[0]] + self[edge[0]][edge[1]]
+                    prev[edge[1]] = edge[0]
+
+        for edge in self.edges_:
+            if dist[edge[0]] + self[edge[0]][edge[1]] < dist[edge[1]]:
+                raise RuntimeError('Graph contains a negative-weight cycle')
+
+        return dist, prev
