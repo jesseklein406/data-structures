@@ -134,6 +134,6 @@ class G(tuple):
 
     def __getitem__(self, item):
         if item not in self.nodes_:
-            raise IndexError("Node not in graph")
+            raise KeyError("Node not in graph")
 
         return item.edges

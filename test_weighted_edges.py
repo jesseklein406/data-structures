@@ -62,18 +62,18 @@ def test_edges_are_weighted(wide_graph):
             assert wide_graph[v][w] == 5
 
 
-def test_weight_not_integer(wide_graph):
+def test_weight_not_integer(node_list, wide_graph):
     with pytest.raises(ValueError):
         wide_graph.add_edge(node_list[1], node_list[10], 'p')
 
 
 def test_node_not_in_graph(wide_graph):
     bad_node = g.Node('bad', 'node')
-    with pytest.raises(IndexError):
+    with pytest.raises(KeyError):
         print wide_graph[bad_node]
 
 
-def test_delete_edge(wide_graph):
+def test_delete_edge(node_list, wide_graph):
     wide_graph.del_edge(node_list[10], node_list[22])
-    with pytest.raises(IndexError):
+    with pytest.raises(KeyError):
         print node_list[10].edges[node_list[22]]
