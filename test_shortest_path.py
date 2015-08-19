@@ -39,3 +39,11 @@ def test_bellman_ford(washington):
     distances, first_stop = washington[0].bellman_ford(washington[1])
     assert distances[washington[4]] == 283
     assert first_stop[washington[4]] == washington[3]
+
+
+def test_bellman_ford_error(washington):
+    fun_land = sg.Node('Fun Land', 5)
+    washington[0].add_edge(washington[1], fun_land, -1000)
+    washington[0].add_edge(fun_land, washington[1], -1000)
+    with pytest.raises(RuntimeError):    # negative cycle to Fun Land
+        distances, first_stop = washington[0].bellman_ford(washington[1])
