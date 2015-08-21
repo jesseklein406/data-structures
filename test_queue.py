@@ -26,9 +26,6 @@ def test_dequeue(create_queue):
     first_val = first_queue.dequeue()
     assert first_val is 1
     assert first_queue.size() is 4
-    second_val = first_queue.dequeue()
-    assert second_val is 2
-    assert first_queue.size() is 3
 
 
 def test_enqueue(create_queue):
@@ -37,9 +34,12 @@ def test_enqueue(create_queue):
     second_queue = create_queue
     second_queue.enqueue(6)
     assert second_queue.size() is 6
-    foo = second_queue.dequeue()
-    assert foo is 1
-    assert second_queue.size() is 5
+
+    for i in range(5):
+        second_queue.dequeue()
+
+    last_val = second_queue.dequeue()
+    assert last_val is 1
 
 
 def test_empty(create_queue):
