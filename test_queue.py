@@ -39,7 +39,7 @@ def test_enqueue(create_queue):
         second_queue.dequeue()
 
     last_val = second_queue.dequeue()
-    assert last_val is 1
+    assert last_val is 6
 
 
 def test_empty(create_queue):
