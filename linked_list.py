@@ -6,12 +6,12 @@ class Node(object):
 
 
 class LinkedList(object):
-    
+
     def __init__(self, iterable=None):
         self.sizeOfList = 0
         self.head = None
 
-        if iterable != None:
+        if iterable is not None:
             for item in iterable:
                 self.insert(item)
 
@@ -30,35 +30,35 @@ class LinkedList(object):
     def size(self):
         return self.sizeOfList
 
-    def search(self,val):
+    def search(self, val):
         current = self.head
 
-        while current != None:
+        while current is not None:
             if current.value == val:
                 return current
             current = current.next_node
 
-    def remove(self,node):
+    def remove(self, node):
         previous = self.head
         current = self.head
 
-        if current is node:
+        if current == node:
             self.head = current.next_node
             self.sizeOfList -= 1
         else:
-            while current != None and not (current is node):
+            while current is not None:
                 previous = current
                 current = current.next_node
 
-            if current is node:
-                previous.next_node = current.next_node
-                self.sizeOfList -=1
-
+                if current == node:
+                    previous.next_node = current.next_node
+                    self.sizeOfList -= 1
+                    break
 
     def display(self):
         current = self.head
         result = ()
-        while current != None:
-            result += (current.value,) 
+        while current is not None:
+            result += (current.value,)
             current = current.next_node
-        return result    
+        return result

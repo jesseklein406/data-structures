@@ -10,7 +10,7 @@ The test file for the module is 'test_queue.py'.
 
 
 ###Linked List Assignment
-Use LinkedList class from link_list.py to implement a singly linked list
+Use LinkedList class from 'link_list.py' to implement a singly linked list. The test module is 'test_linked_list.py'.
 
 
 ###Stack Assignment
