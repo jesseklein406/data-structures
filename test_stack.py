@@ -8,76 +8,35 @@ import pytest
 import stack
 
 
-value = [1, 2, 3, 4, 5]
-foo = stack.Stack(value)
+@pytest.fixture(scope='function')
+def foo():
+    value = [1, 2, 3, 4, 5]
+    foo = stack.Stack(value)
+    return foo
 
 
-# init
-
-def test_init_type():
-    """Check instance is type 'stack'"""
-    assert type(foo) == stack.Stack
+def test_init_error():
+    with pytest.raises(TypeError):
+        return stack.Stack(5)
 
 
-def test_init_push():
-    """Check 'push' in dir(foo)"""
-    assert 'push' in dir(foo)
+def test_pop_value(foo):
+    assert foo.pop() == 5
 
 
-def test_init_pop():
-    """Check 'pop' in dir(foo)"""
-    assert 'pop' in dir(foo)
-
-
-def test_init_insert():
-    """Check 'insert' is not in dir(foo)"""
-    assert 'insert' not in dir(foo)
-
-
-def test_init_size():
-    """Check 'size' is not in dir(foo)"""
-    assert 'size' not in dir(foo)
-
-
-def test_init_search():
-    """Check 'search' is not in dir(foo)"""
-    assert 'search' not in dir(foo)
-
-
-def test_init_remove():
-    """Check 'remove' is not in dir(foo)"""
-    assert 'remove' not in dir(foo)
-
-
-def test_init_display():
-    """Check 'display' is not in dir(foo)"""
-    assert 'display' not in dir(foo)
-
-
-# pop
-
-bar = foo.pop()
-
-
-def test_pop_value():
-    """Check bar = 5"""
-    assert bar == 5
-
-
-empty = stack.Stack([])
-
-
-def test_pop_empty():
+def test_pop_empty(foo):
     """Assert empty.pop() raises Exception"""
     with pytest.raises(AttributeError):
-        nothing = empty.pop()
+        for i in range(6):
+            foo.pop()
 
 
-# push
-
-foo.push(bar)
-
-
-def test_push_restore():
+def test_push(foo):
     """Check foo.pop() = 5"""
-    assert foo.pop() == 5
+    foo.push(6)
+    assert foo._linkedList.head.value == 6
+
+
+def test_preserve_iterable(foo):
+    foo.push([6, 7, 8])
+    foo._linkedList.head.value == [6, 7, 8]
